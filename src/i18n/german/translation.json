@@ -1,0 +1,306 @@
+{
+  "common": {
+    "loading": "Laden...",
+    "error": "Fehler",
+    "success": "Erfolg",
+    "cancel": "Abbrechen",
+    "save": "Speichern",
+    "delete": "Löschen",
+    "edit": "Bearbeiten",
+    "add": "Hinzufügen",
+    "search": "Suchen",
+    "filter": "Filter",
+    "sort": "Sortieren",
+    "refresh": "Aktualisieren",
+    "back": "Zurück",
+    "next": "Weiter",
+    "previous": "Zurück",
+    "submit": "Absenden",
+    "close": "Schließen",
+    "yes": "Ja",
+    "no": "Nein",
+    "confirm": "Bestätigen",
+    "currentLanguage": "Aktuelle Sprache",
+    "languageCode": "Sprachcode"
+  },
+  "navigation": {
+    "home": "Startseite",
+    "games": "Spiele",
+    "casino": "Casino",
+    "live": "Live",
+    "promotions": "Aktionen",
+    "vip": "VIP",
+    "support": "Support",
+    "profile": "Profil",
+    "settings": "Einstellungen",
+    "logout": "Abmelden",
+    "header": {
+      "newCasinos": "NEUE CASINOS",
+      "casinoBonuses": "CASINO-BONUSSE",
+      "onlineCasinos": "ONLINE-CASINOS",
+      "promocodes": "GUTSCHEINCODES",
+      "aboutUs": "ÜBER UNS",
+      "registration": "REGISTRIERUNG",
+      "login": "ANMELDEN",
+      "logout": "ABMELDEN",
+      "account": "Konto",
+      "menuItems": {
+        "newCasinos": {
+          "onlineCasinos": "ONLINE-CASINOS",
+          "realMoneyCasinos": "ECHTGELD-CASINOS",
+          "cryptoCasinos": "KRYPTO-CASINOS",
+          "depositMethods": "EINZAHLUNGSMETHODEN",
+          "mobileCasinos": "MOBILE CASINOS",
+          "casinoReviews": "CASINO-BEWERTUNGEN",
+          "instantPlayCasinos": "SOFORTSPIEL-CASINOS",
+          "sweepstakesCasinos": "LOTTERIE-CASINOS",
+          "casinoCompanies": "CASINO-UNTERNEHMEN",
+          "payNPlayCasinos": "PAY N PLAY CASINOS",
+          "newestCasinos": "NEUESTE CASINOS",
+          "fastestWithdrawalCasinos": "SCHNELLSTE AUSZAHLUNGS-CASINOS",
+          "bestPayoutCasinos": "BESTE AUSZAHLUNGS-CASINOS",
+          "certifiedCasinos": "ZERTIFIZIERTE CASINOS",
+          "blacklistedCasinos": "SCHWARZLISTE CASINOS",
+          "casinosByCountry": "CASINOS NACH LAND"
+        },
+        "casinoBonuses": {
+          "casinoBonuses": "CASINO-BONUSSE",
+          "noDepositBonuses": "KEINE EINZAHLUNGS-BONUSSE",
+          "depositBonuses": "EINZAHLUNGS-BONUSSE",
+          "cashbackBonus": "CASHBACK-BONUS",
+          "cryptoBonuses": "KRYPTO-BONUSSE",
+          "latestBonuses": "NEUESTE BONUSSE",
+          "welcomeBonuses": "WILLKOMMENS-BONUSSE",
+          "matchDepositBonuses": "EINZAHLUNGS-MATCH-BONUSSE",
+          "reloadBonuses": "NACHLADE-BONUSSE",
+          "sweepstakesBonuses": "LOTTERIE-BONUSSE",
+          "exclusiveBonuses": "EXKLUSIVE BONUSSE",
+          "freeSpinsBonuses": "FREISPIN-BONUSSE",
+          "minimumDepositBonuses": "MINIMALEINZAHLUNGS-BONUSSE",
+          "highRollerBonuses": "HIGH-ROLLER-BONUSSE",
+          "noWageringBonuses": "KEINE UMSATZBEDINGUNGS-BONUSSE",
+          "casinosByCountry": "CASINOS NACH LAND"
+        }
+      }
+    }
+  },
+  "auth": {
+    "login": "Anmelden",
+    "register": "Registrieren",
+    "email": "E-Mail",
+    "password": "Passwort",
+    "confirmPassword": "Passwort bestätigen",
+    "forgotPassword": "Passwort vergessen?",
+    "rememberMe": "Angemeldet bleiben",
+    "loginButton": "Anmelden",
+    "registerButton": "Konto erstellen",
+    "alreadyHaveAccount": "Haben Sie bereits ein Konto?",
+    "dontHaveAccount": "Haben Sie noch kein Konto?",
+    "loginSuccess": "Anmeldung erfolgreich!",
+    "registerSuccess": "Registrierung erfolgreich!",
+    "invalidCredentials": "Ungültige E-Mail oder Passwort",
+    "passwordMismatch": "Passwörter stimmen nicht überein",
+    "emailRequired": "E-Mail ist erforderlich",
+    "passwordRequired": "Passwort ist erforderlich",
+    "passwordMinLength": "Passwort muss mindestens 8 Zeichen lang sein",
+    "pages": {
+      "login": {
+        "title": "Willkommen Zurück",
+        "subtitle": "Melden Sie sich in Ihrem Konto an, um fortzufahren",
+        "backToHome": "Zurück zur Startseite"
+      },
+      "register": {
+        "title": "Konto Erstellen",
+        "subtitle": "Schließen Sie sich uns an und beginnen Sie Ihre Casino-Reise",
+        "backToHome": "Zurück zur Startseite"
+      }
+    },
+    "forms": {
+      "login": {
+        "title": "Anmelden",
+        "subtitle": "Geben Sie Ihre Anmeldedaten ein, um auf Ihr Konto zuzugreifen",
+        "emailPlaceholder": "Geben Sie Ihre E-Mail-Adresse ein",
+        "passwordPlaceholder": "Geben Sie Ihr Passwort ein",
+        "forgotPasswordLink": "Passwort vergessen?",
+        "submitButton": "Anmelden",
+        "dividerText": "oder",
+        "socialLogin": "Mit Google fortfahren"
+      },
+      "register": {
+        "title": "Konto Erstellen",
+        "subtitle": "Füllen Sie das Formular unten aus, um Ihr Konto zu erstellen",
+        "firstNamePlaceholder": "Geben Sie Ihren Vornamen ein",
+        "lastNamePlaceholder": "Geben Sie Ihren Nachnamen ein",
+        "emailPlaceholder": "Geben Sie Ihre E-Mail-Adresse ein",
+        "passwordPlaceholder": "Erstellen Sie ein sicheres Passwort",
+        "confirmPasswordPlaceholder": "Bestätigen Sie Ihr Passwort",
+        "termsText": "Ich stimme den",
+        "termsLink": "Nutzungsbedingungen",
+        "marketingText": "Ich stimme dem Erhalt von Marketing-E-Mails zu",
+        "andText": "und der",
+        "privacyLink": "Datenschutzerklärung",
+        "submitButton": "Konto Erstellen",
+        "dividerText": "oder",
+        "socialRegister": "Mit Google fortfahren"
+      }
+    }
+  },
+  "games": {
+    "allGames": "Alle Spiele",
+    "popularGames": "Beliebte Spiele",
+    "newGames": "Neue Spiele",
+    "favoriteGames": "Lieblingsspiele",
+    "gameCategories": {
+      "title": "Spielkategorien",
+      "slots": "Spielautomaten",
+      "tableGames": "Tischspiele",
+      "liveCasino": "Live Casino",
+      "jackpot": "Jackpot",
+      "arcade": "Arcade"
+    },
+    "playNow": "Jetzt spielen",
+    "demoMode": "Demo-Modus",
+    "realMoney": "Echtes Geld",
+    "gameInfo": "Spielinformationen",
+    "provider": "Anbieter",
+    "volatility": "Volatilität",
+    "rtp": "RTP",
+    "minBet": "Mindesteinsatz",
+    "maxBet": "Höchsteinsatz"
+  },
+  "casino": {
+    "welcome": "Willkommen im Casino",
+    "balance": "Guthaben",
+    "deposit": "Einzahlen",
+    "withdraw": "Auszahlen",
+    "bonus": "Bonus",
+    "promotions": "Aktionen",
+    "vipProgram": "VIP-Programm",
+    "loyaltyPoints": "Treuepunkte",
+    "cashback": "Cashback",
+    "tournaments": "Turniere"
+  },
+  "profile": {
+    "personalInfo": "Persönliche Informationen",
+    "firstName": "Vorname",
+    "lastName": "Nachname",
+    "phone": "Telefon",
+    "dateOfBirth": "Geburtsdatum",
+    "country": "Land",
+    "city": "Stadt",
+    "address": "Adresse",
+    "postalCode": "Postleitzahl",
+    "currency": "Währung",
+    "language": "Sprache",
+    "timezone": "Zeitzone",
+    "updateProfile": "Profil aktualisieren",
+    "profileUpdated": "Profil erfolgreich aktualisiert"
+  },
+  "settings": {
+    "accountSettings": "Kontoeinstellungen",
+    "securitySettings": "Sicherheitseinstellungen",
+    "notificationSettings": "Benachrichtigungseinstellungen",
+    "privacySettings": "Datenschutzeinstellungen",
+    "changePassword": "Passwort ändern",
+    "currentPassword": "Aktuelles Passwort",
+    "newPassword": "Neues Passwort",
+    "confirmNewPassword": "Neues Passwort bestätigen",
+    "twoFactorAuth": "Zwei-Faktor-Authentifizierung",
+    "enable2FA": "2FA aktivieren",
+    "disable2FA": "2FA deaktivieren",
+    "notifications": {
+      "email": "E-Mail-Benachrichtigungen",
+      "sms": "SMS-Benachrichtigungen",
+      "push": "Push-Benachrichtigungen",
+      "promotional": "Werbeangebote"
+    }
+  },
+  "support": {
+    "helpCenter": "Hilfecenter",
+    "contactUs": "Kontakt",
+    "liveChat": "Live-Chat",
+    "faq": "FAQ",
+    "tickets": "Support-Tickets",
+    "createTicket": "Ticket erstellen",
+    "ticketSubject": "Betreff",
+    "ticketMessage": "Nachricht",
+    "ticketPriority": "Priorität",
+    "ticketStatus": "Status",
+    "priorityLevels": {
+      "low": "Niedrig",
+      "medium": "Mittel",
+      "high": "Hoch",
+      "urgent": "Dringend"
+    }
+  },
+  "errors": {
+    "pageNotFound": "Seite nicht gefunden",
+    "serverError": "Serverfehler",
+    "networkError": "Netzwerkfehler",
+    "unauthorized": "Nicht autorisiert",
+    "forbidden": "Verboten",
+    "validationError": "Validierungsfehler",
+    "somethingWentWrong": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut."
+  },
+  "validation": {
+    "required": "Dieses Feld ist erforderlich",
+    "invalidEmail": "Bitte geben Sie eine gültige E-Mail-Adresse ein",
+    "invalidPhone": "Bitte geben Sie eine gültige Telefonnummer ein",
+    "passwordTooShort": "Passwort muss mindestens 8 Zeichen lang sein",
+    "passwordTooWeak": "Passwort ist zu schwach. Verwenden Sie Groß- und Kleinbuchstaben, Zahlen und Sonderzeichen",
+    "passwordsDoNotMatch": "Passwörter stimmen nicht überein",
+    "invalidAmount": "Bitte geben Sie einen gültigen Betrag ein",
+    "amountTooLow": "Betrag ist zu niedrig",
+    "amountTooHigh": "Betrag ist zu hoch"
+  },
+  "main": {
+    "hero": {
+      "title": "Finden Sie das beste Online-Casino 2025",
+      "subtitle": "IHRE SPIELERFAHRUNG SOLLTE IMMER ANGENEHM UND SICHER SEIN. VERBRINGEN SIE IHRE FREIZEIT MIT SPASS, INDEM SIE UNSEREN EMPFEHLUNGEN FOLGEN.",
+      "ctaButton": "Casinos Erkunden",
+      "trustedBy": "Vertraut von Millionen von Spielern weltweit"
+    },
+    "casinos": {
+      "title": "Online-Casinos",
+      "subtitle": "Handverlesene Casinos mit den besten Spielen und Boni",
+      "viewAllButton": "Alle Casinos Anzeigen",
+      "rating": "Bewertung",
+      "bonus": "Bonus",
+      "games": "Spiele",
+      "deposit": "Einzahlung",
+      "withdrawal": "Auszahlung"
+    },
+    "bonuses": {
+      "title": "Beste Casino-Boni",
+      "subtitle": "Holen Sie sich die besten Angebote und maximieren Sie Ihre Gewinne",
+      "viewAllButton": "Alle Boni Anzeigen",
+      "noDeposit": "Keine Einzahlung",
+      "welcome": "Willkommen",
+      "freeSpins": "Kostenlose Spins",
+      "cashback": "Cashback",
+      "reload": "Nachladen"
+    },
+    "links": {
+      "title": "SAYCASINONAME",
+      "subtitle": "Entdecken Sie vertrauenswürdige Casino-Bewertungen, Experten-Einblicke und Top-Spieltipps bei SayCasinoName.com – Ihr ultimativer Leitfaden für Online-Glücksspiele",
+      "newCasinos": "Neue Casinos",
+      "cryptoCasinos": "Krypto-Casinos",
+      "mobileCasinos": "Mobile Casinos",
+      "liveCasino": "Live Casino",
+      "slotGames": "Spielautomaten",
+      "tableGames": "Tischspiele"
+    },
+    "account": {
+      "title": "Ihr Konto",
+      "subtitle": "Verwalten Sie Ihre Casino-Erfahrung",
+      "profile": "Profil",
+      "balance": "Guthaben",
+      "deposits": "Einzahlungen",
+      "withdrawals": "Auszahlungen",
+      "bonuses": "Boni",
+      "history": "Verlauf",
+      "settings": "Einstellungen",
+      "logout": "Abmelden"
+    }
+  }
+}
