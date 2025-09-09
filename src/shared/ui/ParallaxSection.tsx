@@ -45,7 +45,7 @@ export type ParallaxSectionProps = {
   /** Классы контейнера для children */
   contentClassName?: string;
   children?: React.ReactNode;
-  /** 
+  /**
    * НОВЫЙ ПРОП: Управляет отображением градиента внизу.   */
   withBottomFade?: boolean;
 };
@@ -58,10 +58,10 @@ const ParallaxSection = React.forwardRef<HTMLElement, ParallaxSectionProps>(
       speed = 0,
       blur = 0,
       overlay = "rgba(0,0,0,0.60)",
-      minHeight = "20vh", 
+      minHeight = "20vh",
       className = "",
       contentClassName = "",
-      // НОВЫЙ ПРОП: 
+      // НОВЫЙ ПРОП:
       withBottomFade = false,
       children,
     },
@@ -71,8 +71,6 @@ const ParallaxSection = React.forwardRef<HTMLElement, ParallaxSectionProps>(
     const [visible, setVisible] = useState(false);
     const [transform, setTransform] = useState<string>("translate3d(0,0,0)");
     const [noMotion, setNoMotion] = useState(false);
-
-    
 
     function attachRef(node: HTMLElement | null) {
       rootRef.current = node;
@@ -118,51 +116,57 @@ const ParallaxSection = React.forwardRef<HTMLElement, ParallaxSectionProps>(
 
     useParallaxBus(update);
 
-    const overscanTop = blur > 0 ? "-15%" : "-10%";
-    const overscanHeight = blur > 0 ? "120%" : "110%";
+    // ИЗМЕНЕНО: Значения overscan могут быть скорректированы для лучшего эффекта
+    const overscanTop = speed !== 0 ? "-20%" : "0";
+    const overscanHeight = speed !== 0 ? "140%" : "100%";
+
 
     return (
       <section
         ref={attachRef}
-        className={`relative ${className}`}
+        className={`relative overflow-hidden ${className}`} // ИЗМЕНЕНО: Добавлен overflow-hidden
         style={{ minHeight, contain: "paint" }}
       >
-        
-        <div className="absolute inset-0 h-full z-0 pointer-events-none overflow-hidden">
-            <div className="sticky inset-0 h-screen">
-                <div
-                    className="absolute left-0 right-0"
-                    style={{
-                    top: overscanTop,
-                    height: overscanHeight,
-                    transform,
-                    willChange: "transform",
-                    backfaceVisibility: "hidden",
-                    filter: blur ? `blur(${blur}px)` : undefined,
-                    }}
-                >
-                    <Image
-                    src={src}
-                    alt={alt}
-                    fill
-                    sizes="100vw"
-                    priority
-                    style={{ objectFit: "cover", transform: "translateZ(0)" }}
-                    />
-                </div>
-                {overlay ? (
-                    <div className="absolute inset-0 pointer-events-none" style={{ background: overlay }} />
-                ) : null}
+        <div
+          className="absolute inset-0 z-0 pointer-events-none" // ИЗМЕНЕНО: Убрана лишняя вложенность и sticky
+          style={{
+            transform,
+            willChange: "transform",
+            backfaceVisibility: "hidden",
+          }}
+        >
+            <div
+                className="absolute left-0 right-0" // ИЗМЕНЕНО: Этот блок теперь отвечает только за изображение
+                style={{
+                top: overscanTop,
+                height: overscanHeight,
+                filter: blur ? `blur(${blur}px)` : undefined,
+                }}
+            >
+                <Image
+                src={src}
+                alt={alt}
+                fill
+                sizes="100vw"
+                priority
+                style={{ objectFit: "cover", transform: "translateZ(0)" }}
+                />
             </div>
         </div>
 
-        {/* 
+        {/* ИЗМЕНЕНО: Слой затемнения вынесен наружу и позиционируется абсолютно */}
+        {overlay ? (
+            <div className="absolute inset-0 z-1 pointer-events-none" style={{ background: overlay }} />
+        ) : null}
+
+
+        {/*
           УСЛОВНЫЙ РЕНДЕР: Этот блок с градиентом теперь будет отображаться
           только если withBottomFade равен true.
         */}
         {withBottomFade && (
             <div
-                className="absolute bottom-0 left-0 right-0 z-1"
+                className="absolute bottom-0 left-0 right-0 z-1" // ИЗМЕНЕНО: Убедитесь, что z-index корректен
                 style={{
                     height: '30rem',
                     background: 'linear-gradient(to top, #080808 25%, transparent 90%)',
@@ -173,7 +177,7 @@ const ParallaxSection = React.forwardRef<HTMLElement, ParallaxSectionProps>(
 
         {/* Контент  */}
         <div
-          className={`relative z-10 ${contentClassName}`}
+          className={`relative z-10 ${contentClassName}`} // ИЗМЕНЕНО: Убедитесь, что z-index контента выше overlay
         >
           {children}
         </div>

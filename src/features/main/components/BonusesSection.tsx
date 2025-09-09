@@ -7,7 +7,7 @@ import { useWindowSize } from "@/shared/hooks/useWindowSize";
 type Props = { speed?: number; blur?: number, overlay?: string};
 
 const BonusesSection = React.forwardRef<HTMLElement, Props>(function BonusesSection(
-  { speed = 0.5, blur = 6, overlay = "rgba(0,0,0,0.60)" },
+  { speed = 0.5, blur = 6, overlay = "rgba(0,0,0,0.30)" },
   ref
 ) {
     // Изменено: теперь это minHeight, чтобы блок мог расширяться.
@@ -48,7 +48,7 @@ const BonusesSection = React.forwardRef<HTMLElement, Props>(function BonusesSect
       blur={blur}
       overlay={overlay}
       // Новый пропс для затемнения нижней части страницы.
-      withBottomFade={true} 
+      withBottomFade={false} 
       minHeight={minHeight} 
       className="text-white"
     >
