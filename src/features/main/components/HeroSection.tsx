@@ -9,7 +9,7 @@ import heroBg from '@/assets/hero-background.jpg';
 type Props = { topOffset?: number; speed?: number; blur?: number; overlay?: string };
 
 const HeroSection = React.forwardRef<HTMLElement, Props>(function HeroSection(
-  { speed = 0.35, blur = 8, overlay = "rgba(0,0,0,0.60)" },
+  { speed = 0.3, blur = 0, overlay = "rgba(0,0,0,0.55)" },
   ref
 ) {
   const [visible, setVisible] = useState(false);

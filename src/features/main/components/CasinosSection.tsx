@@ -8,7 +8,7 @@ import { CasinosContent } from "./CasinosContent";
 type Props = { speed?: number; blur?: number; overlay?: string };
 
 export const CasinosSection = React.forwardRef<HTMLElement, Props>(function CasinosSection(
-  { speed = 0.5, blur = 0, overlay = "rgba(0,0,0,0.55)" },
+  { speed = 0.8, blur = 0, overlay = "rgba(0,0,0,0.55)" },
   ref
 ) {
   return (
@@ -19,6 +19,7 @@ export const CasinosSection = React.forwardRef<HTMLElement, Props>(function Casi
       blur={blur}
       // ИЗМЕНЕНО: height заменен на minHeight
       minHeight={'500px'} 
+      withBottomFade={false} 
       overlay={overlay}
       className="text-white"
       contentClassName="py-24 px-4 sm:px-6 lg:px-8"
