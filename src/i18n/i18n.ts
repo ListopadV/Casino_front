@@ -10,6 +10,9 @@ import translationEN from './english/translation.json';
 import translationFR from './french/translation.json';
 import translationDE from './german/translation.json';
 import translationIT from './italian/translation.json';
+import translationPL from './polish/translation.json';
+import translationRU from './russian/translation.json';
+import translationUK from './ukrainian/translation.json';
 
 // Define available languages
 export const languages = {
@@ -17,6 +20,9 @@ export const languages = {
   fr: { nativeName: 'Français', flag: '🇫🇷' },
   de: { nativeName: 'Deutsch', flag: '🇩🇪' },
   it: { nativeName: 'Italiano', flag: '🇮🇹' },
+  ru: { nativeName: 'Русский', flag: '🇷🇺' },
+  uk: { nativeName: 'Українська', flag: '🇺🇦' },
+  pl: { nativeName: 'Polski', flag: '🇵🇱' },
 };
 
 const resources = {
@@ -31,6 +37,15 @@ const resources = {
   },
   it: {
     translation: translationIT
+  },
+  ru: {
+    translation: translationRU
+  },
+  uk: {
+    translation: translationUK
+  },
+  pl: {
+    translation: translationPL
   },
 };
 
@@ -56,7 +71,7 @@ i18n
   .init({
     resources,
     lng: savedLanguage || getBrowserLanguage(), // Use cookie language or browser language
-    fallbackLng: 'en', // Fallback to English if translation is missing
+    fallbackLng: ['en', 'ru', 'pl'], // Fallback to English, Russian or Polish if translation is missing
     pluralSeparator: '||',
     keySeparator: '.', // Use dot notation for nested translations
     interpolation: {

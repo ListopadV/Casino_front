@@ -1,5 +1,5 @@
 import React from 'react';
-
+import Image from 'next/image';
 
 import { SimilarCasinos } from './SimilarCasinos'; 
 
@@ -12,11 +12,11 @@ const RobyCasinoContent: React.FC = () => {
             <section className="bg-white p-6 rounded-lg shadow-md flex flex-col sm:flex-row gap-4">
                 <div className="relative w-full sm:w-64 my-3 flex-shrink-0">
                     <figure style={{ backgroundColor: '#000000' }} className="w-full aspect-video sm:aspect-square rounded-lg border flex items-center justify-center">
-                        <img
+                        <Image
+
                             alt="Roby Casino logo"
-                            loading="lazy"
                             className="max-w-[95%] max-h-[95%]"
-                            src="https://saycasinoname.com/cdn-cgi/image/w=600/https://rvw.fra1.digitaloceanspaces.com/ROBY_ec8beb9fe7.jpg"
+                            src={"https://saycasinoname.com/cdn-cgi/image/w=600/https://rvw.fra1.digitaloceanspaces.com/ROBY_ec8beb9fe7.jpg"}
                         />
                     </figure>
                     <span className="absolute -top-1 sm:-top-2 sm:-left-2 badge badge-md bg-green-500 p-2 text-white font-normal border-none">new</span>
@@ -53,7 +53,7 @@ const RobyCasinoContent: React.FC = () => {
                     </ul>
                 </div>
                 <div>
-                    <h2 className="text-xl mb-2 font-bold text-black">What we don't like</h2>
+                    <h2 className="text-xl mb-2 font-bold text-black">What we don&apos;t like</h2>
                     <ul className="list-disc list-inside space-y-1">
                         <li>No withdrawals on the weekend</li>
                         <li>Slow withdrawals</li>
@@ -79,14 +79,14 @@ const RobyCasinoContent: React.FC = () => {
             <section className="bg-white p-6 rounded-lg shadow-md">
                 <div className="prose max-w-none text-gray-800">
                     <h2>About Roby Casino</h2>
-                    <p>RobyCasino is highly rated on SayCasinoName, both by players and our team. It has earned our certification and is recognized as one of our Certified Casinos, having received the SayCasinoName Certificate of Trust. In addition to our certification, the casino's reputation is bolstered by several affiliate certifications and accreditations, which are visible at the bottom of the casino's site...</p>
+                    <p>RobyCasino is highly rated on SayCasinoName, both by players and our team. It has earned our certification and is recognized as one of our Certified Casinos, having received the SayCasinoName Certificate of Trust. In addition to our certification, the casino&apos;s reputation is bolstered by several affiliate certifications and accreditations, which are visible at the bottom of the casino&apos;s site...</p>
                     <h2>Payment Information and Options at Roby Casino</h2>
                     <p>RobyCasino offers a variety of payment methods, including both fiat and cryptocurrencies. You can deposit and withdraw using various web wallets, and cryptocurrency options include Bitcoin, Ethereum, Litecoin, Tether, Dogecoin, Ripple, Bitcoin Cash, Cardano, and more...</p>
                     <h2>Customer Support at Roby Casino</h2>
                     <p>RobyCasino has a friendly and professional support team available 24/7. The fastest way to get in touch with a representative is through their live chat feature...</p>
                     <h2>Games at Roby Casino</h2>
                     <p>RobyCasino offers a wide selection of online slots from renowned providers like NetEnt, Microgaming, BGaming, Pragmatic Play, Hacksaw Gaming, and many others...</p>
-                    <h2>Roby Casino’s Commitment to Responsible Gambling</h2>
+                    <h2>Roby Casino&apos;s Commitment to Responsible Gambling</h2>
                     <p>RobyCasino is committed to responsible gambling and provides various tools to help you manage your spending. You can set limits for deposits, losses, and bets directly in your account...</p>
                 </div>
             </section>

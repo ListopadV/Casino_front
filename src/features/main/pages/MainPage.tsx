@@ -18,8 +18,8 @@ const MainPage: React.FC = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isAccountModalOpen, setIsAccountModalOpen] = useState(false);
   
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [loading] = useState(false);
+  const [error] = useState<string | null>(null);
 
   const handleLogin = () => setIsLoggedIn(true);
   const handleLogout = () => setIsLoggedIn(false);

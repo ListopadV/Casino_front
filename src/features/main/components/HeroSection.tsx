@@ -33,10 +33,10 @@ const HeroSection = React.forwardRef<HTMLElement, Props>(function HeroSection(
 
   return (
     <ParallaxSection
-      ref={(node) => {
-        localRef.current = node as any;
-        if (typeof ref === "function") ref(node as any);
-        else if (ref && "current" in (ref as any)) (ref as any).current = node;
+      ref={(node) => {  
+        localRef.current = node as unknown as HTMLElement;
+        if (typeof ref === "function") ref(node as unknown as HTMLElement);
+        else if (ref && "current" in (ref as React.RefObject<HTMLElement>)) (ref as unknown as HTMLElement).current = node;
       }}
       src={heroBg}
       speed={speed}

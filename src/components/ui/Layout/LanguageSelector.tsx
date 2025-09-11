@@ -7,6 +7,8 @@ import flagDE from '@/assets/flags/de.png';
 import flagFR from '@/assets/flags/fr.png';
 import flagGB from '@/assets/flags/gb.png';
 import flagIT from '@/assets/flags/it.png';
+import flagPL from '@/assets/flags/pl.png';
+import flagUKR from '@/assets/flags/ukr.png';
 import { changeLanguage } from '@/i18n/i18n';
 import { useTranslation } from 'react-i18next';
 
@@ -23,6 +25,8 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({ className }) => {
     { code: 'it', name: 'ITALIAN', flag: flagIT },
     { code: 'fr', name: 'FRENCH', flag: flagFR },
     { code: 'de', name: 'GERMAN', flag: flagDE },
+    { code: 'uk', name: 'UKRAINIAN', flag: flagUKR },
+    { code: 'pl', name: 'POLISH', flag: flagPL },
   ];
 
   const currentLanguage = languages.find(lang => lang.code === i18n.language) || languages[0];
