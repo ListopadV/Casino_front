@@ -25,7 +25,7 @@ export const languages = {
   ru: { nativeName: 'Русский', flag: '🇷🇺' },
   uk: { nativeName: 'Українська', flag: '🇺🇦' },
   pl: { nativeName: 'Polski', flag: '🇵🇱' },
-  be: { nativeName: 'беларуская', flag: 'BL' }
+  be: { nativeName: 'беларуская', flag: 'be' },
 };
 
 const resources = {
@@ -53,7 +53,7 @@ const resources = {
   be: {
     translation: translationBE
   },
-};
+}; 
 
 // Get saved language from cookies or use browser preference
 const savedLanguage = Cookies.get('i18nextLng');
