@@ -13,6 +13,8 @@ import translationIT from './italian/translation.json';
 import translationPL from './polish/translation.json';
 import translationRU from './russian/translation.json';
 import translationUK from './ukrainian/translation.json';
+import translationBE from './belorussian/translation.json';
+
 
 // Define available languages
 export const languages = {
@@ -23,6 +25,7 @@ export const languages = {
   ru: { nativeName: 'Русский', flag: '🇷🇺' },
   uk: { nativeName: 'Українська', flag: '🇺🇦' },
   pl: { nativeName: 'Polski', flag: '🇵🇱' },
+  be: { nativeName: 'беларуская', flag: 'BL' }
 };
 
 const resources = {
@@ -46,6 +49,9 @@ const resources = {
   },
   pl: {
     translation: translationPL
+  },
+  be: {
+    translation: translationBE
   },
 };
 

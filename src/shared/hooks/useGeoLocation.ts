@@ -26,7 +26,7 @@ export const useGeoLocation = (): UseGeoLocationReturn => {
     const { language } = locationData;
     
     // Проверяем, поддерживается ли язык
-    const supportedLanguages = ['en', 'fr', 'de', 'it', 'ru', 'uk', 'pl'];
+    const supportedLanguages = ['en', 'fr', 'de', 'it', 'ru', 'uk', 'pl', 'be'];
     const finalLanguage = supportedLanguages.includes(language) ? language : 'en';
     
     // Устанавливаем язык
