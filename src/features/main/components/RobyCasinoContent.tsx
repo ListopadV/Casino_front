@@ -27,7 +27,6 @@ const RobyCasinoContent: React.FC = () => {
 
     return (
         <main>
-            {/* ПОЛНОЭКРАННАЯ ОБЕРТКА С ТЕМНЫМ ФОНОМ */}
             <div className="bg-slate-300">
                 <div className="container max-w-screen-xl mx-auto py-8 lg-py-12 px-4 flex flex-col gap-8">
                     
@@ -98,7 +97,7 @@ const RobyCasinoContent: React.FC = () => {
                         </div>
                     </section>
 
-                    {/* БЛОК 3: ИСПРАВЛЕННЫЙ БЛОК С ТАБАМИ */}
+                    {/* БЛОК 3:  БЛОК С ТАБАМИ */}
                     <section className="bg-white p-6 rounded-lg shadow-md">
                         <div className="flex space-x-2">
                             <button 
