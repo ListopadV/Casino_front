@@ -16,14 +16,44 @@ const DiamondIcon: React.FC<{ className?: string }> = ({ className }) => (
     </svg>
 );
 
+// Компонент звезды с добавленной рамкой (stroke)
+const Star: React.FC<{ percentage: number }> = ({ percentage }) => {
+    const gradientId = `star-gradient-${Math.random().toString(36).substring(2, 9)}`;
+
+    return (
+        <svg
+            className="w-5 h-5"
+            viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg"
+        >
+            <defs>
+                <linearGradient id={gradientId}>
+                    <stop offset={`${percentage}%`} stopColor="#fb923c" /> 
+                    <stop offset={`${percentage}%`} stopColor="#e5e7eb" /> 
+                </linearGradient>
+            </defs>
+            <path
+                d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                fill={`url(#${gradientId})`}
+                stroke="#4b5563" // темно-серый цвет (gray-600) для рамки
+                strokeWidth="0.8"   // толщина рамки
+            />
+        </svg>
+    );
+};
+
 
 const RobyCasinoContent: React.FC = () => {
     // Состояние для отслеживания активной вкладки
     const [activeTab, setActiveTab] = useState('general');
     
     const rating = 8.6;
-    const totalBlocks = 10;
-    const filledBlocks = Math.floor(rating);
+    const totalStars = 10;
+    
+    // Округляем рейтинг до ближайших 0.5
+    const roundedRating = Math.round(rating * 2) / 2;
+    const fullStars = Math.floor(roundedRating);
+    const hasHalfStar = roundedRating % 1 !== 0;
 
     return (
         <main>
@@ -49,17 +79,15 @@ const RobyCasinoContent: React.FC = () => {
                                 
                                 <div className="flex items-center gap-1.5 select-none">
                                     <div className="flex items-center">
-                                        {[...Array(totalBlocks)].map((_, i) => (
-                                            <svg 
-                                                key={i} 
-                                                className={`w-5 h-5 ${i < filledBlocks ? 'text-orange-400' : 'text-gray-300'}`}
-                                                fill="currentColor" 
-                                                viewBox="0 0 20 20" 
-                                                xmlns="http://www.w3.org/2000/svg"
-                                            >
-                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                                            </svg>
-                                        ))}
+                                        {[...Array(totalStars)].map((_, i) => {
+                                            let percentage = 0;
+                                            if (i < fullStars) {
+                                                percentage = 100;
+                                            } else if (i === fullStars && hasHalfStar) {
+                                                percentage = 50;
+                                            }
+                                            return <Star key={i} percentage={percentage} />;
+                                        })}
                                     </div>
                                     <span className="text-sm font-semibold text-gray-700">{rating}/10</span>
                                 </div>
@@ -158,12 +186,12 @@ const RobyCasinoContent: React.FC = () => {
             {/* ОСТАЛЬНАЯ ЧАСТЬ СТРАНИЦЫ НА СВЕТЛОМ ФОНЕ */}
             <div className="bg-gray-100">
                 <div className="container max-w-screen-xl mx-auto py-8 lg-py-12 px-4 flex flex-col gap-8">
-                    <section className="bg-white p-6 rounded-lg shadow-md">
+                    
                         <div className="prose max-w-none text-gray-800">
-                            <h2 className='text-black'>About Roby Casino</h2>
+                            <h2 className='text-black'><b>About Roby Casino</b></h2>
                             <p>RobyCasino is highly rated on SayCasinoName, both by players and our team. It has earned our certification and is recognized as one of our Certified Casinos, having received the SayCasinoName Certificate of Trust. In addition to our certification, the casino&apos;s reputation is bolstered by several affiliate certifications and accreditations, which are visible at the bottom of the casino&apos;s site...</p>
                         </div>
-                    </section>
+                    
 
                     <SimilarCasinos />
                 </div>
