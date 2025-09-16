@@ -6,7 +6,7 @@ import { LinksContent } from "./LinksContent";
 type Props = { speed?: number; blur?: number; overlay?: string; minHeight?: string | number };
 
 const LinkSection = React.forwardRef<HTMLElement, Props>(function LinkSection(
-  { speed = 0.5, blur = 10, overlay = "rgba(185, 28, 28, 0.70)", minHeight = "500px" },
+  { speed = 0.3, blur = 10, overlay = "rgba(185, 28, 28, 0.70)", minHeight = "500px" },
   ref
 ) {
   const [height, setHeight] = useState<string>('500px');

@@ -1,4 +1,4 @@
-import { initializeI18nWithGeoLocation, isSupportedLanguage } from '@/i18n/i18n';
+import { initializeI18nWithGeoLocation } from '@/i18n/i18n';
 import { LanguageData, loadAvailableLanguagesFromStrapi } from '@/shared/api/apiClient';
 import { getClientIP } from '@/shared/api/ipService';
 import { useEffect, useState } from 'react';
@@ -80,7 +80,7 @@ export const useAppInitialization = (): UseAppInitializationReturn => {
         const languages = await loadAvailableLanguagesFromStrapi();
         setAvailableLanguages(languages);
         const { language } = locationData;
-        const finalLanguage = isSupportedLanguage(language) ? language : 'en';
+        const finalLanguage = language || 'en';
         await initializeI18nWithGeoLocation(finalLanguage);
         setIsReady(true);
 

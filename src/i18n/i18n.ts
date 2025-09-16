@@ -4,8 +4,7 @@ import Cookies from 'js-cookie';
 import { initReactI18next } from 'react-i18next';
 
 // Supported languages based on Strapi Translation schema
-export const SUPPORTED_LANGUAGES = ['en', 'pl', 'ru', 'ukr', 'de', 'fr', 'it'] as const;
-export type SupportedLanguage = typeof SUPPORTED_LANGUAGES[number];
+
 
 /**
  * Загружает переводы для указанного языка из Strapi
@@ -54,18 +53,13 @@ i18n
 /**
  * Проверяет, поддерживается ли язык системой
  */
-export const isSupportedLanguage = (lang: string): lang is SupportedLanguage => {
-  return SUPPORTED_LANGUAGES.includes(lang as SupportedLanguage);
-};
 
 /**
  * Изменяет язык приложения, загружая переводы из Strapi
  */
 export const changeLanguage = async (lang: string): Promise<boolean> => {
-  if (!isSupportedLanguage(lang)) {
-    console.warn(`Language ${lang} is not supported. Falling back to English.`);
-    lang = 'en';
-  }
+   
+
 
   try {
     const success = await loadTranslations(lang);
@@ -87,9 +81,9 @@ export const initializeI18nWithGeoLocation = async (geoLanguage?: string): Promi
   
   let targetLanguage = 'en';
   
-  if (savedLanguage && isSupportedLanguage(savedLanguage)) {
+  if (savedLanguage ) {
     targetLanguage = savedLanguage;
-  } else if (geoLanguage && isSupportedLanguage(geoLanguage)) {
+  } else if (geoLanguage) {
     targetLanguage = geoLanguage;
   }
   
