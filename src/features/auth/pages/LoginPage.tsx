@@ -2,7 +2,7 @@
 
 import backgroundImage from "@/assets/auth-background.png";
 import Header from "@/components/ui/Layout/Header";
-import { useAuthStore } from "@/lib/store";
+import { useAuthStore } from "@/shared/lib/store";
 import { apiClient, clientTokenStore } from "@/shared/api/apiClient";
 import { isApiError } from "@/shared/api/apiHelpers";
 import { useRouter } from "next/navigation";
