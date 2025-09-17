@@ -37,6 +37,7 @@ export const useBonuses = (language: string): UseBonusesReturn => {
       loadingStates.set(lang, true);
 
       console.log(`Fetching bonuses for language: ${lang}`);
+      // Теперь бэкенд сам обрабатывает фоллбэк на английский язык
       const fetchedBonuses = await bonusesApi.getBonuses(lang);
       
       // Кешируем результат

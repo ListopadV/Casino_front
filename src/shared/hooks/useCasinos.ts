@@ -36,6 +36,7 @@ export const useCasinos = (language: string): UseCasinosReturn => {
       loadingStates.set(lang, true);
 
       console.log(`Fetching casinos for language: ${lang}`);
+      // Бэкенд сам обрабатывает фоллбэк на английский язык
       const fetchedCasinos = await casinosApi.getCasinos(lang);
       
       // Кешируем результат

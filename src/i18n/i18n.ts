@@ -3,9 +3,6 @@ import i18n, { InitOptions } from 'i18next';
 import Cookies from 'js-cookie';
 import { initReactI18next } from 'react-i18next';
 
-// Supported languages based on Strapi Translation schema
-
-
 /**
  * Загружает переводы для указанного языка из Strapi
  */
@@ -29,7 +26,7 @@ i18n
   .init({
     resources: {}, // Start with empty resources, will be loaded dynamically
     lng: 'en', // Default to English until geo-location determines the correct language
-    fallbackLng: ['en', 'ru', 'pl'], // Fallback languages
+    fallbackLng: ['en'], // Fallback languages
     pluralSeparator: '||',
     keySeparator: '.', // Use dot notation for nested translations
     interpolation: {
@@ -58,9 +55,6 @@ i18n
  * Изменяет язык приложения, загружая переводы из Strapi
  */
 export const changeLanguage = async (lang: string): Promise<boolean> => {
-   
-
-
   try {
     const success = await loadTranslations(lang);
     if (success) {

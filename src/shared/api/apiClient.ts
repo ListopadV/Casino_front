@@ -137,21 +137,11 @@ export const loadAvailableLanguagesFromStrapi = async (): Promise<LanguageData[]
     const response = await apiClient.get<StrapiTranslationResponse>('/api/translations?populate=*');
     
     if (response.data && response.data.length > 0) {
-      // Создаем удобное отображение названий языков
-      const languageNames: Record<string, string> = {
-        'en': 'ENGLISH',
-        'pl': 'POLISH', 
-        'de': 'GERMAN',
-        'ru': 'RUSSIAN',
-        'ukr': 'UKRAINIAN',
-        'fr': 'FRENCH',
-        'it': 'ITALIAN',
-        'be': 'BELARUSIAN'
-      };
 
+      console.log('Response data:', response.data);
       const languages: LanguageData[] = response.data.map(item => ({
         code: item.localeKey,
-        name: languageNames[item.localeKey] || item.localeKey.toUpperCase(),
+        name: item.localeKey,
         flag: item.flag ? {
           url: item.flag.url,
           name: item.flag.name
