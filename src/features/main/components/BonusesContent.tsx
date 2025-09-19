@@ -1,3 +1,4 @@
+// src/features/main/components/BonusesContent.tsx
 'use client'
 
 import { useBonuses } from "@/shared/hooks/useBonuses";
@@ -11,21 +12,6 @@ import BonusCard from "./BonusCard";
 export const BonusesContent: React.FC = () => {
   const { t } = useTranslation();
   const currentLanguage = useLanguageChange();
-
-  // запрос до того как определился язык.
-
-  // cначала запрос на опредление языка. хранить глобально.
-  // и только потом уже запросы на другие данные.. 
-  //
-  // пока языка нету - перевод не применять. тогда {t} нужно блокировать.  
-  // 
-  // либо с cms привозить контент. но в нашем случае лучше уже сразу в файлах перевод. 
-  // 
-  //
-  //
-  //
-  //
-  //
 
   const { bonuses, loading, error } = useBonuses(currentLanguage);
 
@@ -51,9 +37,10 @@ export const BonusesContent: React.FC = () => {
                 ) : (
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-12">
                     {bonuses.map((bonus) => {
-                      const logoUrl = bonus.Logo?.url || ''; 
+                      const logoUrl = bonus.Logo?.data?.attributes?.url || ''; 
                       const casinoName = bonus.Name || 'Unnamed Casino';
                       const bonusLink = bonus.BonusLink || '#';
+                      const slug = bonus.slug; // Получаем slug
                       
                       return (
                         <div key={bonus.id} className="w-full max-w-sm mx-auto">
@@ -61,6 +48,7 @@ export const BonusesContent: React.FC = () => {
                             logoUrl={logoUrl}
                             casinoName={casinoName}
                             bonusLink={bonusLink}
+                            slug={slug} // Передаем slug в BonusCard
                           />
                         </div>
                       );
