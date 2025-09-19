@@ -37,7 +37,7 @@ export const BonusesContent: React.FC = () => {
                 ) : (
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-12">
                     {bonuses.map((bonus) => {
-                      const logoUrl = bonus.Logo?.data?.attributes?.url || ''; 
+                      const logoUrl = bonus.Logo?.url || ''; 
                       const casinoName = bonus.Name || 'Unnamed Casino';
                       const bonusLink = bonus.BonusLink || '#';
                       const slug = bonus.slug; // Получаем slug

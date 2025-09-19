@@ -7,7 +7,7 @@ export interface StrapiMediaAttributes {
   caption: string | null;
   width: number;
   height: number;
-  formats: any; 
+  formats: Record<string, unknown>; 
   hash: string;
   ext: string;
   mime: string;
@@ -15,7 +15,7 @@ export interface StrapiMediaAttributes {
   url: string; 
   previewUrl: string | null;
   provider: string;
-  provider_metadata: any | null;
+  provider_metadata: Record<string, unknown> | null;
   createdAt: string;
   updatedAt: string;
 }
@@ -61,9 +61,7 @@ export interface Bonus {
   Welcome_pack?: string; 
   Rating_Num?: number; 
   Is_new?: boolean; 
-  Logo?: { 
-    data: StrapiMedia | null;
-  };
+  Logo?: StrapiMediaAttributes | null;
   What_we_like?: RichTextBlock[]; 
   What_we_dont_like?: RichTextBlock[]; 
   General?: DetailItem[]; 
@@ -74,10 +72,7 @@ export interface Bonus {
 
 // Интерфейс для ответа Strapi API при получении коллекции (списка) записей
 export interface BonusesResponse {
-  data: {
-    id: number;
-    attributes: Bonus;
-  }[]; 
+  data: Bonus[]; 
 }
 
 export const bonusesApi = {
@@ -88,20 +83,14 @@ export const bonusesApi = {
    */
   async getBonuses(language: string): Promise<Bonus[]> {
     const queryParams = new URLSearchParams({
-      populate: 'Logo', 
+      populate: '*', 
       locale: language,  
     });
     const url = `/api/casino-bonuses?${queryParams.toString()}`;
 
     const response = await apiClient.get<BonusesResponse>(url);
     
-    return response.data.map(item => {
-        const attributesWithoutId: Omit<Bonus, 'id'> = item.attributes;
-        return {
-            id: item.id, 
-            ...attributesWithoutId 
-        };
-    }) || []; 
+    return response.data || []; 
   },
 
   /**
@@ -112,22 +101,19 @@ export const bonusesApi = {
    * @returns Promise, который разрешается в объект Bonus или null, если бонус не найден.
    */
   async getBonusBySlug(slug: string, language: string): Promise<Bonus | null> {
-    const filters = JSON.stringify({ slug: { $eq: slug } }); 
+    // Правильное кодирование URL параметров
     const queryParams = new URLSearchParams({
-      filters: filters,      
+      'filters[slug][$eq]': slug,      
       populate: '*',         
       locale: language,      
     });
+
     const url = `/api/casino-bonuses?${queryParams.toString()}`;
 
     const response = await apiClient.get<BonusesResponse>(url);
 
     if (response.data && response.data.length > 0) {
-        const attributesWithoutId: Omit<Bonus, 'id'> = response.data[0].attributes;
-        return {
-            id: response.data[0].id,
-            ...attributesWithoutId
-        };
+        return response.data[0];
     }
     return null; 
   },

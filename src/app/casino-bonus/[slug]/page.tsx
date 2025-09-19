@@ -1,11 +1,11 @@
 // src/app/casino-bonus/[slug]/page.tsx
 'use client' 
 
+import { useBonusDetail } from '@/shared/hooks/useBonusDetail';
+import { useLanguageChange } from '@/shared/hooks/useLanguageChange';
 import { notFound } from 'next/navigation';
-import { bonusesApi, Bonus } from '@/shared/api/bonusesApi';
-import { useLanguageChange } from '@/shared/hooks/useLanguageChange'; 
-import DynamicCasinoContent from './DynamicCasinoContent'; 
-import React, { useState, useEffect } from 'react';
+import React, { use, useState } from 'react';
+import DynamicCasinoContent from './DynamicCasinoContent';
 
 import Footer from '@/components/ui/Layout/Footer';
 import Header from '@/components/ui/Layout/Header';
@@ -14,14 +14,20 @@ import AccountModal from '@/features/main/components/AccountModal';
 
 
 interface CasinoBonusDetailPageProps {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 const CasinoBonusDetailPage: React.FC<CasinoBonusDetailPageProps> = ({ params }) => {
+
+  // Просто используем use() для Promise
+  const resolvedParams = use(params);
   const currentLanguage = useLanguageChange(); 
-  const [bonusData, setBonusData] = useState<Bonus | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  
+  // Используем новый хук для загрузки данных бонуса
+  const { bonus: bonusData, loading, error } = useBonusDetail(
+    resolvedParams?.slug || '', 
+    currentLanguage || 'en'
+  );
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isAccountModalOpen, setIsAccountModalOpen] = useState(false);
@@ -30,28 +36,10 @@ const CasinoBonusDetailPage: React.FC<CasinoBonusDetailPageProps> = ({ params })
   const openAccountModal = () => setIsAccountModalOpen(true);
   const closeAccountModal = () => setIsAccountModalOpen(false);
 
-  useEffect(() => {
-    if (!params.slug || !currentLanguage) return;
-
-    const fetchBonus = async () => {
-      setLoading(true);
-      setError(null);
-      try {
-        const data = await bonusesApi.getBonusBySlug(params.slug, currentLanguage);
-        if (!data) {
-          notFound(); // Next.js функция для отображения 404 страницы
-        }
-        setBonusData(data);
-      } catch (err) {
-        console.error('Error fetching bonus:', err);
-        setError('Failed to load casino details.');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchBonus();
-  }, [params.slug, currentLanguage]);
+  // Проверяем, что данные загружены, но бонус не найден
+  if (!loading && !bonusData && !error) {
+    notFound(); // Next.js функция для отображения 404 страницы
+  }
 
   if (!currentLanguage || loading) {
     return (

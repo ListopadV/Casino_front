@@ -1,10 +1,10 @@
 // src/app/casino-bonus/[slug]/DynamicCasinoContent.tsx
 'use client'
 
-import React, { useState } from 'react';
-import Image from 'next/image';
-import { Bonus, RichTextBlock, DetailItem, RichTextTextChild, RichTextListItemChild } from '@/shared/api/bonusesApi'; 
 import robyCasinoLogo from '@/assets/roby-casino-logo.jpg'; // Фоллбэк лого
+import { Bonus, DetailItem, RichTextBlock, RichTextListItemChild, RichTextTextChild } from '@/shared/api/bonusesApi';
+import Image from 'next/image';
+import React, { useState } from 'react';
 
 // Иконка кристалла
 const DiamondIcon: React.FC<{ className?: string }> = ({ className }) => (
@@ -154,7 +154,7 @@ const DynamicCasinoContent: React.FC<DynamicCasinoContentProps> = ({ bonusData }
     const hasHalfStar = roundedRating % 1 !== 0;
 
     const strapiUrl = process.env.NEXT_PUBLIC_STRAPI_API_URL || '';
-    const casinoLogoUrl = bonusData.Logo?.data?.attributes?.url ? `${strapiUrl}${bonusData.Logo.data.attributes.url}` : robyCasinoLogo.src;
+    const casinoLogoUrl = bonusData.Logo?.url ? `${strapiUrl}${bonusData.Logo.url}` : robyCasinoLogo.src;
     
     return (
         <main>
