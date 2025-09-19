@@ -1,62 +1,32 @@
+import { loadTranslationsFromStrapi } from '@/shared/api/apiClient';
 import i18n, { InitOptions } from 'i18next';
-import LanguageDetector from 'i18next-browser-languagedetector';
-import Backend from 'i18next-http-backend';
-import ICU from 'i18next-icu';
 import Cookies from 'js-cookie';
 import { initReactI18next } from 'react-i18next';
 
-// Import language resources
-import translationEN from './english/translation.json';
-import translationFR from './french/translation.json';
-import translationDE from './german/translation.json';
-import translationIT from './italian/translation.json';
-
-// Define available languages
-export const languages = {
-  en: { nativeName: 'English', flag: '🇺🇸' },
-  fr: { nativeName: 'Français', flag: '🇫🇷' },
-  de: { nativeName: 'Deutsch', flag: '🇩🇪' },
-  it: { nativeName: 'Italiano', flag: '🇮🇹' },
-};
-
-const resources = {
-  en: {
-    translation: translationEN
-  },
-  fr: {
-    translation: translationFR
-  },
-  de: {
-    translation: translationDE
-  },
-  it: {
-    translation: translationIT
-  },
-};
-
-// Get saved language from cookies or use browser preference
-const savedLanguage = Cookies.get('i18nextLng');
-
-const getBrowserLanguage = (): string => {
-  if (typeof window !== 'undefined' && navigator?.language) {
-    return navigator.language.split('-')[0];
+/**
+ * Загружает переводы для указанного языка из Strapi
+ */
+export async function loadTranslations(locale: string) {
+  try {
+    const translations = await loadTranslationsFromStrapi(locale);
+    
+    if (translations) {
+      i18n.addResourceBundle(locale, 'translation', translations, true, true);
+      await i18n.changeLanguage(locale);
+      return true;
+    }
+  } catch (err) {
+    console.error(`Failed to load translations for ${locale}:`, err);
+    return false;
   }
-  return 'en'; // fallback for SSR
-};
+}
 
 i18n
-  .use(ICU)
-  // Load translations from backend (useful for larger projects)
-  .use(Backend)
-  // Detect user language
-  .use(LanguageDetector)
-  // Pass i18n instance to react-i18next
   .use(initReactI18next)
-  // Initialize i18next
   .init({
-    resources,
-    lng: savedLanguage || getBrowserLanguage(), // Use cookie language or browser language
-    fallbackLng: 'en', // Fallback to English if translation is missing
+    resources: {}, // Start with empty resources, will be loaded dynamically
+    lng: 'en', // Default to English until geo-location determines the correct language
+    fallbackLng: ['en'], // Fallback languages
     pluralSeparator: '||',
     keySeparator: '.', // Use dot notation for nested translations
     interpolation: {
@@ -77,15 +47,46 @@ i18n
     }
   } as InitOptions);
 
-// Create a helper function to change language and save to cookies
-export const changeLanguage = (lang: string) => {
-  if (languages[lang as keyof typeof languages]) {
-    if (typeof window !== 'undefined') {
-      Cookies.set('i18nextLng', lang, { expires: 365, path: '/' });
+/**
+ * Проверяет, поддерживается ли язык системой
+ */
+
+/**
+ * Изменяет язык приложения, загружая переводы из Strapi
+ */
+export const changeLanguage = async (lang: string): Promise<boolean> => {
+  try {
+    const success = await loadTranslations(lang);
+    if (success) {
+      if (typeof window !== 'undefined') {
+        Cookies.set('i18nextLng', lang, { expires: 365, path: '/' });
+      }
+      return true;
     }
-    i18n.changeLanguage(lang);
+    return false;
+  } catch (error) {
+    console.error(`Failed to change language to ${lang}:`, error);
+    return false;
   }
 };
 
+export const initializeI18nWithGeoLocation = async (geoLanguage?: string): Promise<void> => {
+  const savedLanguage = Cookies.get('i18nextLng');
+  
+  let targetLanguage = 'en';
+  
+  if (savedLanguage ) {
+    targetLanguage = savedLanguage;
+  } else if (geoLanguage) {
+    targetLanguage = geoLanguage;
+  }
+  
+  try {
+    await changeLanguage(targetLanguage);
+  } catch (error) {
+    console.error('Failed to initialize i18n:', error);
+    await changeLanguage('en');
+  }
+};
 
 export default i18n;

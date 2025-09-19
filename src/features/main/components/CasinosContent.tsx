@@ -1,10 +1,13 @@
 'use client' 
 
 import cloverImage from '@/assets/clover-white.png';
+import { useCasinos } from '@/shared/hooks/useCasinos';
+import { useLanguageChange } from '@/shared/hooks/useLanguageChange';
 import { useIntersectionObserver } from '@/shared/hooks/usentersectionObserver';
+import CasinosEmptyState from '@/shared/ui/CasinosEmptyState';
 import { bebasNeue } from '@/shared/ui/theme/fonts';
 import Image from 'next/image';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { OnlineCasino } from '../types';
 
@@ -77,40 +80,10 @@ const OnlineCasinoCard: React.FC<OnlineCasinoCardProps> = ({ casino }) => {
 
 export const CasinosContent = () => {
   const { t } = useTranslation();
+  const currentLanguage = useLanguageChange();
   
-  const [casinos, setCasinos] = useState<OnlineCasino[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-    useEffect(() => {
-    const fetchCasinos = async () => {
-      try {
-        const apiUrl = process.env.NEXT_PUBLIC_STRAPI_API_URL;
-        if (!apiUrl) throw new Error("API URL not configured");
-
-        const res = await fetch(`${apiUrl}/api/online-casinos?populate=Rating_Pic`);
-        if (!res.ok) throw new Error("Failed to fetch data");
-        
-        const response = await res.json();
-        
-        if (response.data) {
-          const normalizedData = response.data.map((item: any) => ({
-            id: item.id,
-            ...(item.attributes || item)
-          }));
-          setCasinos(normalizedData);
-        } else {
-          setCasinos([]);
-        }
-      } catch (err: any) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchCasinos();
-  }, []);
+  // Используем новый хук с кешированием
+  const { casinos, loading, error } = useCasinos(currentLanguage);
 
     return (
 
@@ -128,6 +101,8 @@ export const CasinosContent = () => {
           </div>
         ) : error ? (
           <div className="text-red-500 text-center text-lg sm:text-xl lg:text-2xl py-12 sm:py-16 lg:py-20">Error: {error}</div>
+        ) : casinos.length === 0 ? (
+          <CasinosEmptyState />
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
             {casinos.map((casino) => (

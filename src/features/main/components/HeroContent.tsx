@@ -2,7 +2,6 @@
 
 import newsBlock from '@/assets/news-block.png';
 import phoneWithHand from '@/assets/phone-with-hand.png';
-import { useWindowSize } from '@/shared/hooks/useWindowSize';
 import { bebasNeue, roboto } from '@/shared/ui/theme/fonts';
 import Image from 'next/image';
 import React from 'react';
@@ -14,7 +13,6 @@ interface HeroContentProps {
 
 export const HeroContent: React.FC<HeroContentProps> = ({ isVisible }) => {
   const { t } = useTranslation();
-  const { width } = useWindowSize();
   
   return (
     // ИЗМЕНЕНИЕ 1: Добавлен класс `relative` для создания контекста позиционирования

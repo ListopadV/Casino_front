@@ -1,13 +1,9 @@
 "use client";
 
+import { changeLanguage } from '@/i18n/i18n';
+import { useLanguageContext } from '@/i18n/LanguageProvider';
 import Image from 'next/image';
 import React, { useState } from 'react';
-
-import flagDE from '@/assets/flags/de.png';
-import flagFR from '@/assets/flags/fr.png';
-import flagGB from '@/assets/flags/gb.png';
-import flagIT from '@/assets/flags/it.png';
-import { changeLanguage } from '@/i18n/i18n';
 import { useTranslation } from 'react-i18next';
 
 interface LanguageSelectorProps {
@@ -17,19 +13,31 @@ interface LanguageSelectorProps {
 const LanguageSelector: React.FC<LanguageSelectorProps> = ({ className }) => {
   const [isOpen, setIsOpen] = useState(false);
   const { i18n } = useTranslation();
+  const { availableLanguages, isLoading } = useLanguageContext();
 
-  const languages = [
-    { code: 'en', name: 'ENGLISH', flag: flagGB },
-    { code: 'it', name: 'ITALIAN', flag: flagIT },
-    { code: 'fr', name: 'FRENCH', flag: flagFR },
-    { code: 'de', name: 'GERMAN', flag: flagDE },
-  ];
+  if (isLoading || availableLanguages.length === 0) {
+    return (
+      <div className={`relative ${className}`}>
+        <div className="bg-brand-gray text-white px-4 py-2 flex items-center w-full justify-between rounded-md text-sm animate-pulse">
+          <div className="flex items-center space-x-3">
+            <div className="w-6 h-4 bg-gray-600 rounded"></div>
+            <div className="w-16 h-4 bg-gray-600 rounded"></div>
+          </div>
+          <div className="w-4 h-4 bg-gray-600 rounded"></div>
+        </div>
+      </div>
+    );
+  }
 
-  const currentLanguage = languages.find(lang => lang.code === i18n.language) || languages[0];
+  const currentLanguage = availableLanguages.find(lang => lang.code === i18n.language) || availableLanguages[0];
 
-  const handleLanguageChange = (langCode: string) => {
-    changeLanguage(langCode);
-    setIsOpen(false);
+  const handleLanguageChange = async (langCode: string) => {
+    try {
+      await changeLanguage(langCode);
+      setIsOpen(false);
+    } catch (error) {
+      console.error('Failed to change language:', error);
+    }
   };
 
   return (
@@ -39,7 +47,19 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({ className }) => {
         className="bg-brand-gray text-white px-4 py-2 flex items-center w-full justify-between transition-all duration-300 rounded-md text-sm" 
       >
         <div className="flex items-center space-x-3">
-          <Image src={currentLanguage.flag} alt={currentLanguage.name} width={24} height={16} />
+          {currentLanguage.flag ? (
+            <Image 
+              src={`${process.env.NEXT_PUBLIC_STRAPI_API_URL}${currentLanguage.flag.url}`} 
+              alt={currentLanguage.flag.name} 
+              width={24} 
+              height={16}
+              className="object-cover rounded-sm"
+            />
+          ) : (
+            <div className="w-6 h-4 bg-gray-500 rounded-sm flex items-center justify-center text-xs">
+              {currentLanguage.code.toUpperCase()}
+            </div>
+          )}
           <span>{currentLanguage.name}</span>
         </div>
         <svg
@@ -54,7 +74,7 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({ className }) => {
       {isOpen && (
         <div className="absolute top-full mt-1 left-0 w-full bg-brand-gray rounded-b-md overflow-hidden shadow-lg animate-fadeInDown z-10">
           <ul>
-            {languages.map((lang) => (
+            {availableLanguages.map((lang) => (
               <li 
                 key={lang.code} 
                 onClick={() => handleLanguageChange(lang.code)}
@@ -62,7 +82,19 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({ className }) => {
                   i18n.language === lang.code ? 'bg-black/30' : ''
                 }`}
               >
-                <Image src={lang.flag} alt={lang.name} width={24} height={16} />
+                {lang.flag ? (
+                  <Image 
+                    src={`${process.env.NEXT_PUBLIC_STRAPI_API_URL}${lang.flag.url}`} 
+                    alt={lang.flag.name} 
+                    width={24} 
+                    height={16}
+                    className="object-cover rounded-sm"
+                  />
+                ) : (
+                  <div className="w-6 h-4 bg-gray-500 rounded-sm flex items-center justify-center text-xs">
+                    {lang.code.toUpperCase()}
+                  </div>
+                )}
                 <span>{lang.name}</span>
               </li>
             ))}

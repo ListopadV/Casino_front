@@ -178,6 +178,7 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, onAccountClick, onLogoutCli
                   >
                     {t('navigation.header.aboutUs')}
                   </a>
+
                 </nav>
               </div>
 
