@@ -30,12 +30,11 @@ class ApiClient {
     return response.json();
   }
 
-  async get<T>(endpoint: string, params?: Record<string, string>): Promise<T> {
-    const url = params 
-      ? `${endpoint}?${new URLSearchParams(params).toString()}`
-      : endpoint;
-    
-    return this.request<T>(url, { method: 'GET' });
+  async get<T>(endpoint: string, options?: RequestInit): Promise<T> {
+    return this.request<T>(endpoint, { 
+        method: 'GET',
+        ...options, 
+    });
   }
 
   async post<T>(endpoint: string, data?: unknown): Promise<T> {
@@ -52,6 +51,7 @@ class ApiClient {
 
 export const clientTokenStore = createAccessTokenStore();
 export const apiClient = new ApiClient();
+
 
 /**
  * Интерфейс для данных переводов из Strapi

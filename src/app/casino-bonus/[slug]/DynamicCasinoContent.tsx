@@ -1,7 +1,7 @@
 // src/app/casino-bonus/[slug]/DynamicCasinoContent.tsx
 'use client'
 
-import robyCasinoLogo from '@/assets/roby-casino-logo.jpg'; // Фоллбэк лого
+import robyCasinoLogo from '@/assets/son-logo.png'; // На всякий случай если картинка не картинки не будет в Strapi
 import { Bonus, DetailItem, RichTextBlock, RichTextListItemChild, RichTextTextChild } from '@/shared/api/bonusesApi';
 import Image from 'next/image';
 import React, { useState } from 'react';
@@ -144,11 +144,8 @@ const renderRichText = (blocks: RichTextBlock[] | undefined | null) => {
 
 const DynamicCasinoContent: React.FC<DynamicCasinoContentProps> = ({ bonusData }) => {
     const [activeTab, setActiveTab] = useState('general');
-    
-    // Динамические данные
     const rating = bonusData.Rating_Num || 0; 
     const totalStars = 10; 
-    
     const roundedRating = Math.round(rating * 2) / 2;
     const fullStars = Math.floor(roundedRating);
     const hasHalfStar = roundedRating % 1 !== 0;
@@ -160,7 +157,6 @@ const DynamicCasinoContent: React.FC<DynamicCasinoContentProps> = ({ bonusData }
         <main>
             <div className="bg-slate-300">
                 <div className="container max-w-screen-xl mx-auto py-8 lg-py-12 px-4 flex flex-col gap-8">
-                    
                     {/* БЛОК 1: Основная информация о казино */}
                     <section className="flex flex-col sm:flex-row gap-6">
                         <div className="relative w-full sm:w-56 flex-shrink-0">
@@ -174,7 +170,6 @@ const DynamicCasinoContent: React.FC<DynamicCasinoContentProps> = ({ bonusData }
                                     style={{ objectFit: 'contain' }}
                                 />
                             </figure>
-                            {/* Если есть флаг "NEW" в Strapi, можно отобразить */}
                             {bonusData.Is_new && <span className="absolute -top-2 -left-2 badge badge-md bg-green-500 p-2 text-white font-semibold border-none">NEW</span>}
                         </div>
 
@@ -197,19 +192,16 @@ const DynamicCasinoContent: React.FC<DynamicCasinoContentProps> = ({ bonusData }
                                     <span className="text-sm font-semibold text-gray-700">{rating}/10</span> 
                                 </div>
                             </div>
-
-                            <a className="w-full sm:w-80 flex flex-col text-center border border-dashed border-gray-300 rounded-md group transition-all py-3 bg-gray-50 hover:border-blue-500" href={bonusData.BonusLink || bonusData.Welcome_cash_link || '#'} target="_blank" rel="noopener noreferrer">
+                            <a className="w-full sm:w-80 flex flex-col text-center border border-dashed border-gray-300 rounded-md group transition-all py-3 bg-gray-50 hover:border-blue-500" href={bonusData.Welcome_cash_link || '#'} target="_blank" rel="noopener noreferrer">
                                 <span className="text-sm text-gray-600">Welcome Pack</span>
                                 <p className="text-lg font-bold text-center text-black">{bonusData.Welcome_pack || 'N/A'}</p> 
                             </a>
-
-                            <a href={bonusData.BonusLink || bonusData.Welcome_cash_link || '#'} rel="noopener noreferrer" target="_blank" 
+                            <a href={bonusData.Welcome_cash_link || '#'} rel="noopener noreferrer" target="_blank" 
                                className="btn bg-red-600 hover:bg-red-700 text-white border-none w-full sm:w-80 text-lg h-12 rounded-none flex items-center justify-center">
                                 Visit casino
                             </a>
                         </div>
                     </section>
-                    
                     {/* БЛОК 2: "What we like / don't like" */}
                     <section className="bg-white p-6 rounded-lg shadow-md grid grid-cols-1 sm:grid-cols-2 gap-6 text-gray-800">
                         <div>
