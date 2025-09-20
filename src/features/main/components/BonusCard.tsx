@@ -1,4 +1,3 @@
-// src/features/main/components/BonusCard.tsx
 "use client";
 
 import { bebasNeue } from '@/shared/ui/theme/fonts';
@@ -9,13 +8,12 @@ import React, { useEffect, useRef, useState } from 'react';
 interface BonusCardProps {
   logoUrl: string;
   casinoName: string;
-  bonusLink: string;
   slug: string; 
 }
 
-const BonusCard: React.FC<BonusCardProps> = ({ logoUrl, casinoName, bonusLink, slug }) => {
+const BonusCard: React.FC<BonusCardProps> = ({ logoUrl, casinoName, slug }) => {
   const [isIntersecting, setIntersecting] = useState(false);
-  const cardRef = useRef<HTMLDivElement>(null);
+  const cardRef = useRef<HTMLAnchorElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -40,11 +38,13 @@ const BonusCard: React.FC<BonusCardProps> = ({ logoUrl, casinoName, bonusLink, s
   const strapiUrl = process.env.NEXT_PUBLIC_STRAPI_API_URL || '';
 
   return (
-    <div 
+    <Link 
+      href={`/casino-bonus/${slug}`}
       ref={cardRef} 
-      className={`relative rounded-[20px] sm:rounded-[30px] lg:rounded-[40px] shadow-2xl overflow-hidden transition-all duration-700 hover:scale-95 sm:hover:scale-90 lg:hover:scale-85 aspect-[506/589] ${isIntersecting ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-5'}`}
+      className={`relative block rounded-[20px] sm:rounded-[30px] lg:rounded-[40px] shadow-2xl overflow-hidden transition-all duration-700 hover:scale-95 sm:hover:scale-90 lg:hover:scale-85 aspect-[506/589] ${isIntersecting ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-5'}`}
     >
-      <Link href={`/casino-bonus/${slug}`} className="absolute top-0 left-0 right-0 bottom-[80px] sm:bottom-[90px] lg:bottom-[100px] bg-black rounded-[20px] sm:rounded-[30px] lg:rounded-[40px] z-10 flex flex-col items-center justify-between p-4 sm:p-6 lg:p-8 cursor-pointer">
+      {/* Верхняя часть с лого и названием */}
+      <div className="absolute top-0 left-0 right-0 bottom-[80px] sm:bottom-[90px] lg:bottom-[100px] bg-black rounded-[20px] sm:rounded-[30px] lg:rounded-[40px] z-10 flex flex-col items-center justify-between p-4 sm:p-6 lg:p-8">
           <div className="flex-grow flex items-center justify-center w-full">
               {logoUrl ? (
                 <Image
@@ -62,19 +62,18 @@ const BonusCard: React.FC<BonusCardProps> = ({ logoUrl, casinoName, bonusLink, s
           <h3 className={`${bebasNeue.className} text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-center leading-tight`}>
             <span className="block">{casinoName}</span>
           </h3>
-      </Link>
+      </div>
 
+      {/* Нижняя часть с кнопкой */}
       <div 
         className="absolute bottom-0 left-0 right-0 h-[100px] sm:h-[120px] lg:h-[120px] bg-brand-accent-red flex flex-col justify-end items-center pb-4 sm:pb-6 lg:pb-8 rounded-b-[20px] sm:rounded-b-[30px] lg:rounded-b-[40px] transition-all"
         style={{ boxShadow: 'inset 0px 10px 15px -5px rgba(0,0,0,0.4)' }}
       >
-        <a href={bonusLink} target="_blank" rel="noopener noreferrer">
-          <button className={`${bebasNeue.className} bg-white text-brand-accent-red text-lg sm:text-xl lg:text-2xl px-4 sm:px-5 lg:px-6 py-2 sm:py-2.5 lg:py-3 rounded-full hover:bg-gray-200 transition-colors`}>
+        <div className={`${bebasNeue.className} bg-white text-brand-accent-red text-lg sm:text-xl lg:text-2xl px-4 sm:px-5 lg:px-6 py-2 sm:py-2.5 lg:py-3 rounded-full`}>
             GET A BONUS
-          </button>
-        </a>
+        </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

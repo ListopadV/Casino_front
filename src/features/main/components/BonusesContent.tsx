@@ -1,4 +1,3 @@
-// src/features/main/components/BonusesContent.tsx
 'use client'
 
 import { useBonuses } from "@/shared/hooks/useBonuses";
@@ -40,15 +39,14 @@ export const BonusesContent: React.FC = () => {
                       const logoUrl = bonus.Logo?.url || ''; 
                       const casinoName = bonus.Name || 'Unnamed Casino';
                       const bonusLink = bonus.BonusLink || '#';
-                      const slug = bonus.slug; // Получаем slug
+                      const slug = bonus.slug; 
                       
                       return (
                         <div key={bonus.id} className="w-full max-w-sm mx-auto">
                           <BonusCard 
                             logoUrl={logoUrl}
                             casinoName={casinoName}
-                            bonusLink={bonusLink}
-                            slug={slug} // Передаем slug в BonusCard
+                            slug={slug} 
                           />
                         </div>
                       );

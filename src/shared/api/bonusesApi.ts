@@ -1,4 +1,3 @@
-// src/shared/api/bonusesApi.ts
 import { apiClient } from './apiClient';
 
 export interface StrapiMediaAttributes {
@@ -69,16 +68,16 @@ export interface Bonus {
   About_casino?: RichTextBlock[]; 
 }
 
-// Интерфейс для ответа Strapi API при получении коллекции (списка) записей
 export interface BonusesResponse {
   data: Bonus[]; 
+  meta?: any; 
 }
 
 export const bonusesApi = {
   /**
    *
-   * @param language Текущий язык.
-   * @returns Promise, который разрешается в массив объектов Bonus.
+   * @param language 
+   * @returns 
    */
   async getBonuses(language: string): Promise<Bonus[]> {
     const queryParams = new URLSearchParams({
@@ -93,14 +92,17 @@ export const bonusesApi = {
   },
 
   /**
-   * Получает детали одного бонуса по его slug.
-   *
-   * @param slug Уникальный идентификатор бонуса (slug).
+   * @param slug 
    * @param language Текущий язык.
-   * @returns Promise, который разрешается в объект Bonus или null, если бонус не найден.
+   * @param options 
+   * @returns 
    */
-  async getBonusBySlug(slug: string, language: string): Promise<Bonus | null> {
-    // Правильное кодирование URL параметров
+
+  async getBonusBySlug(
+    slug: string, 
+    language: string, 
+    options?: RequestInit
+  ): Promise<Bonus | null> {
     const queryParams = new URLSearchParams({
       'filters[slug][$eq]': slug,      
       populate: '*',         
@@ -109,7 +111,7 @@ export const bonusesApi = {
 
     const url = `/api/casino-bonuses?${queryParams.toString()}`;
 
-    const response = await apiClient.get<BonusesResponse>(url);
+    const response = await apiClient.get<BonusesResponse>(url, options);
 
     if (response.data && response.data.length > 0) {
         return response.data[0];
