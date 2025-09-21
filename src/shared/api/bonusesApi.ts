@@ -51,7 +51,6 @@ export interface DetailItem {
     description: string; 
 }
 
-
 export interface Bonus {
   id: number;
   Name: string;

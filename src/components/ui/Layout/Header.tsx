@@ -205,13 +205,13 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, onAccountClick, onLogoutCli
                     <>
                       <Link
                         href="/register"
-                        className="bg-brand-accent-red hover:bg-red-700 text-white text-2xl py-1.5 px-4 rounded-md uppercase"
+                        className="bg-brand-accent-red hover:bg-red-700 text-white text-xl py-1.5 px-4 rounded-md uppercase whitespace-nowrap"
                       >
                         {t('navigation.header.registration')}
                       </Link>
                       <Link
                         href="/login"
-                        className="border border-brand-accent-red hover:bg-brand-accent-red text-white text-2xl py-1.5 px-4 rounded-md uppercase"
+                        className="border border-brand-accent-red hover:bg-brand-accent-red text-white text-xl py-1.5 px-4 whitespace-nowrap rounded-md uppercase"
                       >
                         {t('navigation.header.login')}
                       </Link>
