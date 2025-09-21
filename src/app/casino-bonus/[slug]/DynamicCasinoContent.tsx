@@ -1,8 +1,8 @@
-// src/app/casino-bonus/[slug]/DynamicCasinoContent.tsx
 'use client'
 
-import robyCasinoLogo from '@/assets/son-logo.png'; // На всякий случай если картинка не картинки не будет в Strapi
+import robyCasinoLogo from '@/assets/son-logo.png';
 import { Bonus, DetailItem, RichTextBlock, RichTextListItemChild, RichTextTextChild } from '@/shared/api/bonusesApi';
+import { OnlineCasino } from '@/features/main/types'; 
 import Image from 'next/image';
 import React, { useState } from 'react';
 
@@ -18,7 +18,7 @@ const DiamondIcon: React.FC<{ className?: string }> = ({ className }) => (
     </svg>
 );
 
-// Компонент звезды с добавленной рамкой (stroke)
+// Компонент звезды
 const Star: React.FC<{ percentage: number }> = ({ percentage }) => {
     const gradientId = `star-gradient-${Math.random().toString(36).substring(2, 9)}`;
 
@@ -37,15 +37,15 @@ const Star: React.FC<{ percentage: number }> = ({ percentage }) => {
             <path
                 d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
                 fill={`url(#${gradientId})`}
-                stroke="#4b5563" // темно-серый цвет (gray-600) для рамки
-                strokeWidth="0.8"   // толщина рамки
+                stroke="#4b5563"
+                strokeWidth="0.8"
             />
         </svg>
     );
 };
 
 interface DynamicCasinoContentProps {
-    bonusData: Bonus;
+    bonusData: Bonus | OnlineCasino; 
 }
 
 const renderRichText = (blocks: RichTextBlock[] | undefined | null) => {
@@ -66,7 +66,7 @@ const renderRichText = (blocks: RichTextBlock[] | undefined | null) => {
                         </span>
                     );
                 }
-                return null; // Если это не текстовый child, то игнорируем его в параграфе
+                return null;
               })}
             </p>
           );
@@ -74,8 +74,6 @@ const renderRichText = (blocks: RichTextBlock[] | undefined | null) => {
             return (
                 <ul key={index} className="list-disc list-inside space-y-1">
                     {block.children.map((listItem: RichTextTextChild | RichTextListItemChild, liIndex: number) => {
-                        // Strapi Rich Text для списков имеет блок.children типа RichTextListItemChild
-                        // Но если вдруг он вернет RichTextTextChild (например, ошибкой), этот if обработает
                         if (listItem.type === 'list-item') { 
                             return (
                                 <li key={liIndex}>
@@ -244,9 +242,9 @@ const DynamicCasinoContent: React.FC<DynamicCasinoContentProps> = ({ bonusData }
                                     {bonusData.General.map((item: DetailItem) => (
                                         <li key={item.id} className="flex items-start space-x-3">
                                             <DiamondIcon className="w-4 h-4 text-sky-500 mt-1 flex-shrink-0" />
-                                            <div>
+                                            <div className="min-w-0">
                                                 <h3 className="font-bold text-black">{item.Name}:</h3>
-                                                <p className="text-gray-700">{item.description}</p>
+                                                <p className="text-gray-700 break-words">{item.Description}</p>
                                             </div>
                                         </li>
                                     ))}
@@ -257,9 +255,9 @@ const DynamicCasinoContent: React.FC<DynamicCasinoContentProps> = ({ bonusData }
                                      {bonusData.Payment_info.map((item: DetailItem) => (
                                         <li key={item.id} className="flex items-start space-x-3">
                                             <DiamondIcon className="w-4 h-4 text-sky-500 mt-1 flex-shrink-0" />
-                                            <div>
+                                            <div className="min-w-0">
                                                 <h3 className="font-bold text-black">{item.Name}:</h3>
-                                                <p className="text-gray-700">{item.description}</p>
+                                                <p className="text-gray-700 break-words">{item.Description}</p>
                                             </div>
                                         </li>
                                     ))}
@@ -270,9 +268,9 @@ const DynamicCasinoContent: React.FC<DynamicCasinoContentProps> = ({ bonusData }
                                      {bonusData.Games_info.map((item: DetailItem) => (
                                         <li key={item.id} className="flex items-start space-x-3">
                                             <DiamondIcon className="w-4 h-4 text-sky-500 mt-1 flex-shrink-0" />
-                                            <div>
+                                            <div className="min-w-0">
                                                 <h3 className="font-bold text-black">{item.Name}:</h3>
-                                                <p className="text-gray-700">{item.description}</p>
+                                                <p className="text-gray-700 break-words">{item.Description}</p>
                                             </div>
                                         </li>
                                     ))}
@@ -303,7 +301,7 @@ const DynamicCasinoContent: React.FC<DynamicCasinoContentProps> = ({ bonusData }
                         </div>
                     
 
-                    {/* <SimilarCasinos /> */} 
+                    {/* </SimilarCasinos >  */}
                 </div>
             </div>
         </main>

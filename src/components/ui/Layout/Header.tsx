@@ -12,7 +12,10 @@ import { useTranslation } from 'react-i18next';
 
 interface HeaderProps {
   isLoggedIn: boolean;
+  onAccountClick: () => void;
+  onLogoutClick: () => void;
 }
+
 
 const Header: React.FC<HeaderProps> = ({ isLoggedIn }) => {
   const { t } = useTranslation();
@@ -27,6 +30,7 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn }) => {
   // Функции для управления модальным окном
   const openAccountModal = () => setIsAccountModalOpen(true);
   const closeAccountModal = () => setIsAccountModalOpen(false);
+  
 
   // Функция для выхода из аккаунта
   const handleLogout = () => {
@@ -193,7 +197,6 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn }) => {
                 <div className="hidden md:flex items-center space-x-4">
                   {isLoggedIn ? (
                     <div className="flex items-center space-x-4">
-                      {/* 3. Используем наши внутренние функции */}
                       <button
                         onClick={openAccountModal}
                         className="bg-brand-accent-red rounded-full w-10 h-10 flex items-center justify-center hover:brightness-90 transition"
@@ -353,7 +356,7 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn }) => {
               <>
                 <button
                   onClick={() => {
-                    openAccountModal(); // Используем внутреннюю функцию
+                    openAccountModal(); 
                     toggleMenu();
                   }}
                   className="bg-brand-accent-red rounded-full w-16 h-16 flex items-center justify-center hover:brightness-90 transition"
@@ -362,7 +365,7 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn }) => {
                 </button>
                 <button
                   onClick={() => {
-                    handleLogout(); // Используем внутреннюю функцию
+                    handleLogout(); 
                     toggleMenu();
                   }}
                   className="border border-brand-accent-red hover:bg-brand-accent-red text-white text-4xl py-4 px-12 rounded-md uppercase"
@@ -392,7 +395,6 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn }) => {
         </div>
       )}
       
-      {/* 4. Рендерим модальное окно здесь, на основе нашего внутреннего состояния */}
       {isAccountModalOpen && <AccountModal onClose={closeAccountModal} />}
     </>
   );

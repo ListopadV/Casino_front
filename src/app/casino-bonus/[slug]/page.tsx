@@ -1,11 +1,8 @@
 import { bonusesApi } from '@/shared/api/bonusesApi';
+import { casinosApi } from '@/shared/api/casinosApi';
 import { notFound } from 'next/navigation';
 import React from 'react';
-import DynamicCasinoContent from './DynamicCasinoContent';
-
-import Footer from '@/components/ui/Layout/Footer';
-import Header from '@/components/ui/Layout/Header';
-import Main from '@/components/ui/Layout/Main';
+import CasinoBonusPageClient from './CasinoBonusPageClient'; 
 
 interface CasinoBonusDetailPageProps {
   params: { slug: string };
@@ -13,31 +10,18 @@ interface CasinoBonusDetailPageProps {
 
 const CasinoBonusDetailPage = async ({ params }: CasinoBonusDetailPageProps) => {
   const slug = params.slug;
-  const currentLanguage = 'en'; 
+  const currentLanguage = 'en';
 
-  const bonusData = await bonusesApi.getBonusBySlug(
-    slug, 
-    currentLanguage,
-    { cache: 'no-store' } 
-  );
+  const bonusData = await bonusesApi.getBonusBySlug(slug, currentLanguage, { cache: 'no-store' });
+  const casinoData = await casinosApi.getCasinoBySlug(slug, currentLanguage, { cache: 'no-store' });
+  
+  const finalData = bonusData || casinoData;
 
-  if (!bonusData) {
+  if (!finalData) {
     notFound();
   }
-  
-  const isLoggedIn = false; 
 
-  return (
-    <div className="bg-slate-100"> 
-      <Header isLoggedIn={isLoggedIn} />
-
-      <Main>
-        <DynamicCasinoContent bonusData={bonusData} />
-      </Main>
-
-      <Footer />
-    </div>
-  );
+  return <CasinoBonusPageClient data={finalData} />;
 };
 
 export default CasinoBonusDetailPage;

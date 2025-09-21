@@ -43,11 +43,10 @@ export interface RichTextBlock {
   format?: string; 
 }
 
-// --- ИНТЕРФЕЙСЫ ДЛЯ ПОВТОРЯЕМЫХ КОМПОНЕНТОВ (Info Block) ---
 export interface DetailItem {
     id: number;
     Name: string; 
-    description: string; 
+    Description: string; 
 }
 
 export interface Bonus {
