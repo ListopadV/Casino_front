@@ -1,19 +1,14 @@
 "use client";
 
-import { Bebas_Neue } from 'next/font/google';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-
+import { bebasNeue } from '@/shared/ui/theme/fonts';
 import backgroundImageUrl from "@/assets/auth-background.png";
 import logo from '@/assets/son-logo.png';
 
-const bebas_neue = Bebas_Neue({
-  subsets: ['latin'],
-  weight: ['400']
-});
 
 interface RegisterFormProps {
   onSubmit: (data: { email: string; password: string; terms: boolean; marketing: boolean }) => void;
@@ -55,7 +50,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSubmit }) => {
       <div className="relative z-20">
         <div className="relative bg-brand-gray flex items-center justify-between p-3 md:p-5 h-[64px] md:h-[84px]">
           <div className="flex-1">
-            <h2 className={`${bebas_neue.className} text-xl sm:text-2xl md:text-3xl text-gray-200 -skew-x-12 tracking-wider`}>
+            <h2 className={`${bebasNeue.className} text-xl sm:text-2xl md:text-3xl text-gray-200 -skew-x-12 tracking-wider`}>
               {t('auth.forms.register.title')}
             </h2>
           </div>
@@ -125,7 +120,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSubmit }) => {
                   e.target.style.backgroundImage = e.target.checked ? checkmarkIcon : 'none';
                 }}
               />
-              <label htmlFor="terms" className="ml-3 block text-sm text-gray-200 cursor-pointer md:whitespace-nowrap font-bold uppercase">
+              <label htmlFor="terms" className="ml-3 block text-sm text-gray-200 cursor-pointer font-bold uppercase">
                 {t('auth.forms.register.termsText')}{' '}
                 <Link 
                   href="https://saycasinoname.com/en/terms-and-conditions" 
@@ -168,7 +163,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSubmit }) => {
           
           <button
             type="submit"
-            className={`${bebas_neue.className} w-full bg-brand-accentRed hover:brightness-90 text-white text-3xl py-3 rounded-lg uppercase transition-all tracking-widest border border-red-400/50`}
+            className={`${bebasNeue.className} w-full bg-brand-accentRed hover:brightness-90 text-white text-3xl py-3 rounded-lg uppercase transition-all tracking-widest border border-red-400/50`}
           >
             <span className="block -skew-x-[14deg] font-bold">{t('auth.forms.register.submitButton')}</span>
           </button>
