@@ -36,7 +36,8 @@ const HeroSection = React.forwardRef<HTMLElement, Props>(function HeroSection(
       ref={(node) => {  
         localRef.current = node as unknown as HTMLElement;
         if (typeof ref === "function") ref(node as unknown as HTMLElement);
-        else if (ref && "current" in (ref as React.RefObject<HTMLElement>)) (ref as unknown as HTMLElement).current = node;
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        else if (ref && "current" in (ref as any)) (ref as any).current = node;
       }}
       src={heroBg}
       speed={speed}

@@ -1,11 +1,11 @@
 import { OnlineCasinoPageClient } from "@/features/casinos/pages/OnlineCasinoPageClient";
 
 interface OnlineCasinoDetailPageProps {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
-const OnlineCasinoDetailPage = ({ params }: OnlineCasinoDetailPageProps) => {
-  const slug = params.slug;
+const OnlineCasinoDetailPage = async ({ params }: OnlineCasinoDetailPageProps) => {
+  const { slug } = await params;
   return <OnlineCasinoPageClient slug={slug} />;
 };
 

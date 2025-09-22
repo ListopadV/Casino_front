@@ -9,6 +9,7 @@ const LinkSection = React.forwardRef<HTMLElement, Props>(function LinkSection(
   { speed = 0.3, blur = 10, overlay = "rgba(185, 28, 28, 0.70)", minHeight = "500px" },
   ref
 ) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [height, setHeight] = useState<string>('500px');
 
   const getHeight = useCallback(() => {
@@ -40,6 +41,7 @@ const LinkSection = React.forwardRef<HTMLElement, Props>(function LinkSection(
 
   return (
     <ParallaxSection
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       ref={ref as any}
       src={linksBg}
       speed={speed}

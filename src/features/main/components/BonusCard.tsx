@@ -2,7 +2,7 @@
 
 import { bebasNeue } from '@/shared/ui/theme/fonts';
 import Image from 'next/image';
-import Link from 'next/link'; 
+import Link from 'next/link';
 import React, { useEffect, useRef, useState } from 'react';
 
 interface BonusCardProps {

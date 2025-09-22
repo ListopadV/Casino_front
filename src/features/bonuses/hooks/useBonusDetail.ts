@@ -23,12 +23,8 @@ export const useBonusDetail = (slug: string, language: string): UseBonusDetailRe
     try {
       setLoading(true);
       setError(null);
-
-      console.log(`Fetching bonus detail for slug: ${bonusSlug}, language: ${lang}`);
       const fetchedBonus = await bonusesApi.getBonusBySlug(bonusSlug, lang);
-      
       setData(fetchedBonus);
-      
     } catch (err) {
       console.error('Error fetching bonus detail:', err);
       

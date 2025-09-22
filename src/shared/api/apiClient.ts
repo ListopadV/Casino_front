@@ -118,7 +118,6 @@ export const loadTranslationsFromStrapi = async (localeKey: string): Promise<Rec
     
     if (response.data && response.data.length > 0) {
       const translationData = response.data[0];
-      console.log('Translation data:', translationData.content);
       return translationData.content;
     }
     
@@ -138,7 +137,6 @@ export const loadAvailableLanguagesFromStrapi = async (): Promise<LanguageData[]
     
     if (response.data && response.data.length > 0) {
 
-      console.log('Response data:', response.data);
       const languages: LanguageData[] = response.data.map(item => ({
         code: item.localeKey,
         name: item.localeKey,
@@ -148,7 +146,6 @@ export const loadAvailableLanguagesFromStrapi = async (): Promise<LanguageData[]
         } : undefined
       }));
       
-      console.log('Processed languages:', languages);
       return languages;
     }
     return [];

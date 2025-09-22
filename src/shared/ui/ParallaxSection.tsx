@@ -75,6 +75,7 @@ const ParallaxSection = React.forwardRef<HTMLElement, ParallaxSectionProps>(
     function attachRef(node: HTMLElement | null) {
       rootRef.current = node;
       if (typeof ref === "function") ref(node);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       else if (ref && "current" in (ref as any)) (ref as any).current = node;
     }
 

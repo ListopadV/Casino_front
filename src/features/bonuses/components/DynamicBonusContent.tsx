@@ -141,7 +141,6 @@ const renderRichText = (blocks: RichTextBlock[] | undefined | null) => {
 
 const DynamicBonusContent: React.FC<DynamicBonusContentProps> = ({ bonusData }) => {
 
-    console.log(bonusData);
     const [activeTab, setActiveTab] = useState('general');
     const rating = bonusData.Rating_Num || 0; 
     const totalStars = 10; 

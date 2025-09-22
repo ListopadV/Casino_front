@@ -17,11 +17,9 @@ const CasinoBonusPageClient: React.FC<CasinoBonusPageClientProps> = ({ slug }) =
   const isLoggedIn = false;
 
   const handleAccountClick = () => {
-    console.log("Account button clicked!");
   };
 
   const handleLogoutClick = () => {
-    console.log("Logout button clicked!");
   };
 
   if (loading) {

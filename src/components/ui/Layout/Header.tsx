@@ -34,7 +34,6 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn }) => {
 
   // Функция для выхода из аккаунта
   const handleLogout = () => {
-    console.log("User logged out");
   };
   
   const getMenuItems = (): Record<string, string[]> => ({

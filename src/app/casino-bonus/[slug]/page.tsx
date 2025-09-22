@@ -1,11 +1,11 @@
 import CasinoBonusPageClient from "@/features/bonuses/pages/CasinoBonusPageClient";
 
 interface CasinoBonusDetailPageProps {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
-const CasinoBonusDetailPage = ({ params }: CasinoBonusDetailPageProps) => {
-  const slug = params.slug;
+const CasinoBonusDetailPage = async ({ params }: CasinoBonusDetailPageProps) => {
+  const { slug } = await params;
   return <CasinoBonusPageClient slug={slug} />;
 };
 
