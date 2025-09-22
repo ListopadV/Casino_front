@@ -1,4 +1,3 @@
-// src/shared/api/bonusesApi.ts
 import { apiClient } from './apiClient';
 
 export interface StrapiMediaAttributes {
@@ -44,11 +43,10 @@ export interface RichTextBlock {
   format?: string; 
 }
 
-// --- ИНТЕРФЕЙСЫ ДЛЯ ПОВТОРЯЕМЫХ КОМПОНЕНТОВ (Info Block) ---
 export interface DetailItem {
     id: number;
     Name: string; 
-    description: string; 
+    Description: string; 
 }
 
 export interface Bonus {
@@ -69,18 +67,18 @@ export interface Bonus {
   About_casino?: RichTextBlock[]; 
 }
 
-// Интерфейс для ответа Strapi API при получении коллекции (списка) записей
 export interface BonusesResponse {
   data: Bonus[]; 
+  meta?: Record<string, unknown>; 
 }
 
 export const bonusesApi = {
   /**
-   *
-   * @param language Текущий язык.
-   * @returns Promise, который разрешается в массив объектов Bonus.
+   * Получает список бонусов с автоматическим fallback
+   * @param language Язык контента
+   * @returns Массив бонусов
    */
-  async getBonuses(language: string): Promise<Bonus[]> {
+  async getBonuses(language: string = 'en'): Promise<Bonus[]> {
     const queryParams = new URLSearchParams({
       populate: '*', 
       locale: language,  
@@ -93,14 +91,17 @@ export const bonusesApi = {
   },
 
   /**
-   * Получает детали одного бонуса по его slug.
-   *
-   * @param slug Уникальный идентификатор бонуса (slug).
+   * @param slug 
    * @param language Текущий язык.
-   * @returns Promise, который разрешается в объект Bonus или null, если бонус не найден.
+   * @param options 
+   * @returns 
    */
-  async getBonusBySlug(slug: string, language: string): Promise<Bonus | null> {
-    // Правильное кодирование URL параметров
+
+  async getBonusBySlug(
+    slug: string, 
+    language: string, 
+    options?: RequestInit
+  ): Promise<Bonus | null> {
     const queryParams = new URLSearchParams({
       'filters[slug][$eq]': slug,      
       populate: '*',         
@@ -109,11 +110,61 @@ export const bonusesApi = {
 
     const url = `/api/casino-bonuses?${queryParams.toString()}`;
 
-    const response = await apiClient.get<BonusesResponse>(url);
+    const response = await apiClient.get<BonusesResponse>(url, options);
 
     if (response.data && response.data.length > 0) {
         return response.data[0];
     }
     return null; 
+  },
+
+  /**
+   * Получает бонус по слагу с автоматическим fallback на английский язык
+   * Использует новую backend логику с умным дополнением контента
+   * @param slug Слаг бонуса
+   * @param language Предпочтительный язык
+   * @param options Дополнительные опции запроса
+   * @returns Бонус с fallback контентом или null
+   */
+  async getBonusBySlugWithFallback(
+    slug: string, 
+    language: string = 'en', 
+    options?: RequestInit
+  ): Promise<Bonus | null> {
+    const queryParams = new URLSearchParams({
+      'filters[slug][$eq]': slug,      
+      populate: '*',         
+      locale: language,      // backend автоматически применит fallback логику
+    });
+
+    const url = `/api/casino-bonuses?${queryParams.toString()}`;
+
+    const response = await apiClient.get<BonusesResponse>(url, options);
+
+    if (response.data && response.data.length > 0) {
+        return response.data[0];
+    }
+    return null; 
+  },
+
+  /**
+   * Получает список бонусов с автоматическим fallback
+   * @param language Предпочтительный язык
+   * @param options Дополнительные опции запроса
+   * @returns Массив бонусов с fallback контентом
+   */
+  async getBonusesWithFallback(
+    language: string = 'en',
+    options?: RequestInit
+  ): Promise<Bonus[]> {
+    const queryParams = new URLSearchParams({
+      populate: '*', 
+      locale: language,  // backend автоматически применит fallback логику
+    });
+    const url = `/api/casino-bonuses?${queryParams.toString()}`;
+
+    const response = await apiClient.get<BonusesResponse>(url, options);
+    
+    return response.data || []; 
   },
 };

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useRef, useCallback } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 interface ParallaxOptions {
   speed?: number;
@@ -33,15 +33,15 @@ export const useParallax = (options: ParallaxOptions = {}): ParallaxReturn => {
   const rafId = useRef<number | undefined>(undefined);
 
   // Detect if device has issues with fixed backgrounds (iOS/Safari)
-  const [isMacOrIOS, setIsMacOrIOS] = useState(false);
+  // const [isMacOrIOS, setIsMacOrIOS] = useState(false);
 
   useEffect(() => {
-    const userAgent = navigator.userAgent.toLowerCase();
-    const isMac = /macintosh|mac os x/i.test(userAgent);
-    const isIOS = /iphone|ipad|ipod/i.test(userAgent);
-    const isSafari = /safari/i.test(userAgent) && !/chrome/i.test(userAgent);
+    // const userAgent = navigator.userAgent.toLowerCase();
+    // const isMac = /macintosh|mac os x/i.test(userAgent);
+    // const isIOS = /iphone|ipad|ipod/i.test(userAgent);
+    // const isSafari = /safari/i.test(userAgent) && !/chrome/i.test(userAgent);
     
-    setIsMacOrIOS(isMac || isIOS || isSafari);
+    // setIsMacOrIOS(isMac || isIOS || isSafari);
   }, []);
 
   // Intersection Observer for visibility

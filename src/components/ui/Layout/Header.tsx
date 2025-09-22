@@ -1,15 +1,14 @@
 "use client";
 
+import logo from "@/assets/son-logo.png";
+import userIcon from "@/assets/user-icon.png";
 import LanguageSelector from '@/components/ui/Layout/LanguageSelector';
+import AccountModal from '@/features/main/components/AccountModal'; 
 import { bebasNeue } from '@/shared/ui/theme/fonts';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-
-
-import logo from "@/assets/son-logo.png";
-import userIcon from "@/assets/user-icon.png";
 
 interface HeaderProps {
   isLoggedIn: boolean;
@@ -17,17 +16,26 @@ interface HeaderProps {
   onLogoutClick: () => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ isLoggedIn, onAccountClick, onLogoutClick }) => {
+
+const Header: React.FC<HeaderProps> = ({ isLoggedIn }) => {
   const { t } = useTranslation();
+  
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  // мегаменю (десктоп)
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
-
-  // аккордеон (мобилка)
   const [openAccordionMenu, setOpenAccordionMenu] = useState<string | null>(null);
 
-  // данные для меню
+  // Состояние для модального окна
+  const [isAccountModalOpen, setIsAccountModalOpen] = useState(false);
+
+  // Функции для управления модальным окном
+  const openAccountModal = () => setIsAccountModalOpen(true);
+  const closeAccountModal = () => setIsAccountModalOpen(false);
+  
+
+  // Функция для выхода из аккаунта
+  const handleLogout = () => {
+  };
+  
   const getMenuItems = (): Record<string, string[]> => ({
     "new-casinos": [
       t('navigation.header.menuItems.newCasinos.onlineCasinos'),
@@ -189,13 +197,13 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, onAccountClick, onLogoutCli
                   {isLoggedIn ? (
                     <div className="flex items-center space-x-4">
                       <button
-                        onClick={onAccountClick}
+                        onClick={openAccountModal}
                         className="bg-brand-accent-red rounded-full w-10 h-10 flex items-center justify-center hover:brightness-90 transition"
                       >
                         <Image src={userIcon} alt="Account" width={66} height={66} />
                       </button>
                       <button
-                        onClick={onLogoutClick}
+                        onClick={handleLogout}
                         className="border border-brand-accent-red hover:bg-brand-accent-red text-white text-2xl py-1.5 px-4 rounded-md uppercase"
                       >
                         {t('navigation.header.logout')}
@@ -341,13 +349,13 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, onAccountClick, onLogoutCli
             })}
           </nav>
 
-          {/* Низ мобильного меню — твоя правка */}
+          {/* Низ мобильного меню */}
           <div className="flex flex-col items-center space-y-6 md:hidden w-full px-8">
             {isLoggedIn ? (
               <>
                 <button
                   onClick={() => {
-                    onAccountClick();
+                    openAccountModal(); 
                     toggleMenu();
                   }}
                   className="bg-brand-accent-red rounded-full w-16 h-16 flex items-center justify-center hover:brightness-90 transition"
@@ -356,7 +364,7 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, onAccountClick, onLogoutCli
                 </button>
                 <button
                   onClick={() => {
-                    onLogoutClick();
+                    handleLogout(); 
                     toggleMenu();
                   }}
                   className="border border-brand-accent-red hover:bg-brand-accent-red text-white text-4xl py-4 px-12 rounded-md uppercase"
@@ -385,9 +393,10 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, onAccountClick, onLogoutCli
           </div>
         </div>
       )}
+      
+      {isAccountModalOpen && <AccountModal onClose={closeAccountModal} />}
     </>
   );
 };
-
 
 export default Header;

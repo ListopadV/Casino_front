@@ -3,6 +3,7 @@
 import backgroundImage from "@/assets/auth-background.png";
 import Header from "@/components/ui/Layout/Header";
 import { useAuthStore } from "@/shared/lib/store";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { apiClient, clientTokenStore } from "@/shared/api/apiClient";
 import { isApiError } from "@/shared/api/apiHelpers";
 import { useRouter } from "next/navigation";
@@ -13,12 +14,19 @@ const LoginPage: React.FC = () => {
   const router = useRouter();
   const setAuth = useAuthStore((state) => state.setAuth);
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleLogin = async ({ email, password }: { email: string; password: string }) => {
     try {
       // Replace with your actual login endpoint
-      const response = await apiClient.post("/auth/login", { email, password });
-      const { token, user } = response.data;
+      // const response = await apiClient.post("/auth/login", { email, password });
 
+      // const { token, user } = response.data;
+
+      const token = "";
+      const user = {
+        id: "1",
+        email: email,
+      };
       clientTokenStore.setAccessToken(token);
       setAuth(user);
 

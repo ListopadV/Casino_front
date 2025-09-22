@@ -214,7 +214,7 @@ export const CasinoReviewForm: React.FC<CasinoReviewFormProps> = ({
   };
 
   return (
-    <div className="w-full max-w-2xl mx-auto bg-brand-medium rounded-lg shadow-lg overflow-hidden">
+    <div className="w-full bg-brand-medium rounded-lg shadow-lg overflow-hidden">
       {/* Заголовок формы */}
       <div className="bg-brand-dark px-6 py-4 border-b border-brand-gray">
         <h2 className="text-xl font-semibold text-brand-light-gray">

@@ -3,6 +3,7 @@
 import backgroundImage from "@/assets/auth-background.png";
 import Header from "@/components/ui/Layout/Header";
 import { useAuthStore } from "@/shared/lib/store";
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { apiClient, clientTokenStore } from "@/shared/api/apiClient";
 import { isApiError } from "@/shared/api/apiHelpers";
 import { useRouter } from "next/navigation";
@@ -15,9 +16,9 @@ const RegistrationPage: React.FC = () => {
 
   const handleRegister = async ({
     email,
-    password,
-    terms,
-    marketing,
+    // password,
+    // terms,
+    // marketing,
   }: {
     email: string;
     password: string;
@@ -26,14 +27,19 @@ const RegistrationPage: React.FC = () => {
   }) => {
     try {
       // Замените на ваш реальный endpoint регистрации
-      const response = await apiClient.post("/auth/register", {
-        email,
-        password,
-        terms,
-        marketing,
-      });
-      const { token, user } = response.data;
+      // const response = await apiClient.post("/auth/register", {
+      //   email,
+      //   password,
+      //   terms,
+      //   marketing,
+      // });
+      // const { token, user } = response.data;
 
+      const token = "";
+      const user = {
+        id: "1",
+        email: email,
+      }
       clientTokenStore.setAccessToken(token);
       setAuth(user);
 
