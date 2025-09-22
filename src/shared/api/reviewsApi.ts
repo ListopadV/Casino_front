@@ -31,7 +31,7 @@ export const reviewsApi = {
    * Создать новый отзыв
    */
   async createReview(reviewData: CreateReviewData): Promise<CasinoReview> {
-    const response = await apiClient.post<CasinoReviewResponse>('/api/casino-reviews', {
+    const response = await apiClient.post<CasinoReviewResponse>('/api/reviews', {
       data: {
         ...reviewData,
         Created: new Date().toISOString(),

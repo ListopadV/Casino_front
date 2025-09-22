@@ -4,7 +4,11 @@ class ApiClient {
   private baseURL: string;
 
   constructor() {
-    this.baseURL = process.env.NEXT_PUBLIC_STRAPI_API_URL || '';
+    // В продакшене используем переменную окружения, в development - прокси
+    this.baseURL = process.env.NODE_ENV === 'production' 
+      ? process.env.NEXT_PUBLIC_STRAPI_API_URL || 'https://prized-festival-c69e982a8e.strapiapp.com'
+      : '/api/strapi';
+    
     if (!this.baseURL) {
       console.warn('NEXT_PUBLIC_STRAPI_API_URL is not defined');
     }
