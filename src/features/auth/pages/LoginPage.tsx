@@ -2,10 +2,9 @@
 
 import backgroundImage from "@/assets/auth-background.png";
 import Header from "@/components/ui/Layout/Header";
-import { useAuthStore } from "@/shared/lib/store";
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { apiClient, clientTokenStore } from "@/shared/api/apiClient";
 import { isApiError } from "@/shared/api/apiHelpers";
+import { useAuthStore } from "@/shared/lib/store";
 import { useRouter } from "next/navigation";
 import React from "react";
 import LoginForm from "../components/LoginForm";
@@ -14,25 +13,15 @@ const LoginPage: React.FC = () => {
   const router = useRouter();
   const setAuth = useAuthStore((state) => state.setAuth);
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleLogin = async ({ email, password }: { email: string; password: string }) => {
     try {
-      // Replace with your actual login endpoint
-      // const response = await apiClient.post("/auth/login", { email, password });
-
-      // const { token, user } = response.data;
-
-      const token = "";
-      const user = {
-        id: "1",
-        email: email,
-      };
+      const response = await apiClient.post<{ data: { token: string; user: { id: string; email: string } } }>("/auth/login", { email, password });
+      const { token, user } = response.data;
+      
       clientTokenStore.setAccessToken(token);
       setAuth(user);
-
       router.push("/");
     } catch (error) {
-      // Handle error (show message, etc.)
       if (isApiError(error)){
           console.error(error.data.error.message)
       }

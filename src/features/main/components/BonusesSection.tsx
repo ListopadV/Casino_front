@@ -42,8 +42,7 @@ const BonusesSection = React.forwardRef<HTMLElement, Props>(function BonusesSect
 
   return (
     <ParallaxSection
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      ref={ref as any}
+      ref={ref}
       src={bonusesBg}
       speed={speed}
       blur={blur}
