@@ -80,7 +80,13 @@ export const bonusesApi = {
    */
   async getBonuses(language: string = 'en'): Promise<Bonus[]> {
     const queryParams = new URLSearchParams({
-      populate: '*', 
+      'populate[Logo]': 'true',
+      'populate[What_we_like]': 'true',
+      'populate[What_we_dont_like]': 'true',
+      'populate[General]': 'true',
+      'populate[Payment_info]': 'true',
+      'populate[Games_info]': 'true',
+      'populate[About_casino]': 'true',
       locale: language,  
     });
     const url = `/api/casino-bonuses?${queryParams.toString()}`;
@@ -104,7 +110,13 @@ export const bonusesApi = {
   ): Promise<Bonus | null> {
     const queryParams = new URLSearchParams({
       'filters[slug][$eq]': slug,      
-      populate: '*',         
+      'populate[Logo]': 'true',
+      'populate[What_we_like]': 'true',
+      'populate[What_we_dont_like]': 'true',
+      'populate[General]': 'true',
+      'populate[Payment_info]': 'true',
+      'populate[Games_info]': 'true',
+      'populate[About_casino]': 'true',         
       locale: language,      
     });
 
@@ -133,7 +145,13 @@ export const bonusesApi = {
   ): Promise<Bonus | null> {
     const queryParams = new URLSearchParams({
       'filters[slug][$eq]': slug,      
-      populate: '*',         
+      'populate[Logo]': 'true',
+      'populate[What_we_like]': 'true',
+      'populate[What_we_dont_like]': 'true',
+      'populate[General]': 'true',
+      'populate[Payment_info]': 'true',
+      'populate[Games_info]': 'true',
+      'populate[About_casino]': 'true',         
       locale: language,      // backend автоматически применит fallback логику
     });
 
@@ -158,7 +176,13 @@ export const bonusesApi = {
     options?: RequestInit
   ): Promise<Bonus[]> {
     const queryParams = new URLSearchParams({
-      populate: '*', 
+      'populate[Logo]': 'true',
+      'populate[What_we_like]': 'true',
+      'populate[What_we_dont_like]': 'true',
+      'populate[General]': 'true',
+      'populate[Payment_info]': 'true',
+      'populate[Games_info]': 'true',
+      'populate[About_casino]': 'true', 
       locale: language,  // backend автоматически применит fallback логику
     });
     const url = `/api/casino-bonuses?${queryParams.toString()}`;

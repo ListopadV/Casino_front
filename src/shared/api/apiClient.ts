@@ -114,10 +114,11 @@ export interface LanguageData {
 }
 
 /**
- * Загружает переводы для указанного языка из Strapi
+ * Загружает переводы для указанного языка из Strapi с автоматическим fallback на английский
  */
 export const loadTranslationsFromStrapi = async (localeKey: string): Promise<Record<string, unknown>> => {
   try {
+    // Попытка загрузить переводы для указанного языка
     const response = await apiClient.get<StrapiTranslationResponse>(`/api/translations?filters[localeKey][$eq]=${localeKey}&populate=*`);
     
     if (response.data && response.data.length > 0) {
@@ -125,7 +126,18 @@ export const loadTranslationsFromStrapi = async (localeKey: string): Promise<Rec
       return translationData.content;
     }
     
-    throw new Error(`No translations found for locale: ${localeKey}`);
+    // Если переводы для указанного языка не найдены, попробуем английский
+    if (localeKey !== 'en') {
+      console.warn(`No translations found for locale: ${localeKey}, falling back to English`);
+      const fallbackResponse = await apiClient.get<StrapiTranslationResponse>(`/api/translations?filters[localeKey][$eq]=en&populate=*`);
+      
+      if (fallbackResponse.data && fallbackResponse.data.length > 0) {
+        const fallbackTranslationData = fallbackResponse.data[0];
+        return fallbackTranslationData.content;
+      }
+    }
+    
+    throw new Error(`No translations found for locale: ${localeKey} and fallback to English failed`);
   } catch (error) {
     console.error(`Failed to load translations for ${localeKey}:`, error);
     throw error;

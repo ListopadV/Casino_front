@@ -22,7 +22,11 @@ export const casinosApi = {
    */
   async getCasinos(language: string = 'en'): Promise<OnlineCasino[]> {
     const queryParams = new URLSearchParams({
-      populate: '*', 
+      'populate[Logo]': 'true',
+      'populate[General]': 'true',
+      'populate[Payment_info]': 'true',
+      'populate[Games_info]': 'true',
+      'populate[similar_casinos][populate][Logo]': 'true',
       locale: language,
     });
     const url = `/api/online-casinos?${queryParams.toString()}`;
@@ -41,7 +45,11 @@ export const casinosApi = {
   ): Promise<OnlineCasino | null> {
     const queryParams = new URLSearchParams({
       'filters[slug][$eq]': slug,      
-      populate: '*',         
+      'populate[Logo]': 'true',
+      'populate[General]': 'true',
+      'populate[Payment_info]': 'true',
+      'populate[Games_info]': 'true',
+      'populate[similar_casinos][populate][Logo]': 'true',         
       locale: language,      
     });
 
@@ -69,7 +77,11 @@ export const casinosApi = {
   ): Promise<OnlineCasino | null> {
     const queryParams = new URLSearchParams({
       'filters[slug][$eq]': slug,      
-      populate: '*',         
+      'populate[Logo]': 'true',
+      'populate[General]': 'true',
+      'populate[Payment_info]': 'true',
+      'populate[Games_info]': 'true',
+      'populate[similar_casinos][populate][Logo]': 'true',         
       locale: language,      // backend автоматически применит fallback логику
     });
 
@@ -93,7 +105,11 @@ export const casinosApi = {
     options?: RequestInit
   ): Promise<OnlineCasino[]> {
     const queryParams = new URLSearchParams({
-      populate: '*', 
+      'populate[Logo]': 'true',
+      'populate[General]': 'true',
+      'populate[Payment_info]': 'true',
+      'populate[Games_info]': 'true',
+      'populate[similar_casinos][populate][Logo]': 'true', 
       locale: language,  // backend автоматически применит fallback логику
     });
     const url = `/api/online-casinos?${queryParams.toString()}`;
