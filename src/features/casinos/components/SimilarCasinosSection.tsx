@@ -8,8 +8,7 @@ interface SimilarCasinoCardProps {
 }
 
 const SimilarCasinoCard: React.FC<SimilarCasinoCardProps> = ({ casino }) => {
-  const strapiUrl = process.env.NEXT_PUBLIC_STRAPI_API_URL || '';
-  const logoUrl = casino.Logo?.url ? `${strapiUrl}${casino.Logo.url}` : '';
+  const logoUrl = casino.Logo?.url ? casino.Logo.url : '';
   const reviewUrl = `/online-casino/${casino.slug}`;
 
   return (

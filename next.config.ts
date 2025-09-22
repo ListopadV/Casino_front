@@ -8,7 +8,11 @@ const nextConfig: NextConfig = {
     ignoreDuringBuilds: true,
   },
   images: {
-    domains: ["localhost", "prized-festival-c69e982a8e.strapiapp.com"],
+    domains: [
+      "localhost", 
+      "prized-festival-c69e982a8e.strapiapp.com",
+      "prized-festival-c69e982a8e.media.strapiapp.com"
+    ],
      remotePatterns: [
       {
         protocol: 'http',
@@ -20,6 +24,11 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'prized-festival-c69e982a8e.strapiapp.com',
         pathname: '/uploads/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'prized-festival-c69e982a8e.media.strapiapp.com',
+        pathname: '/**',
       },
     ],
   },

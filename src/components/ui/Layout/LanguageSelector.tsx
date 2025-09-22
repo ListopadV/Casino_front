@@ -49,7 +49,7 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({ className }) => {
         <div className="flex items-center space-x-3">
           {currentLanguage.flag ? (
             <Image 
-              src={`${process.env.NEXT_PUBLIC_STRAPI_API_URL}${currentLanguage.flag.url}`} 
+              src={currentLanguage.flag.url} 
               alt={currentLanguage.flag.name} 
               width={24} 
               height={16}
@@ -84,7 +84,7 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({ className }) => {
               >
                 {lang.flag ? (
                   <Image 
-                    src={`${process.env.NEXT_PUBLIC_STRAPI_API_URL}${lang.flag.url}`} 
+                    src={lang.flag.url} 
                     alt={lang.flag.name} 
                     width={24} 
                     height={16}

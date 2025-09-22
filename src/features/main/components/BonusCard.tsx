@@ -36,8 +36,6 @@ const BonusCard: React.FC<BonusCardProps> = ({ logoUrl, casinoName, slug }) => {
     };
   }, []);
   
-  const strapiUrl = process.env.NEXT_PUBLIC_STRAPI_API_URL || '';
-
   return (
     <Link 
       href={`/casino-bonus/${slug}`}
@@ -49,7 +47,7 @@ const BonusCard: React.FC<BonusCardProps> = ({ logoUrl, casinoName, slug }) => {
           <div className="flex-grow flex items-center justify-center w-full">
               {logoUrl ? (
                 <Image
-                  src={`${strapiUrl}${logoUrl}`}
+                  src={logoUrl}
                   alt={`${casinoName} Logo`}
                   width={300} 
                   height={100}

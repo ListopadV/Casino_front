@@ -148,8 +148,7 @@ const DynamicBonusContent: React.FC<DynamicBonusContentProps> = ({ bonusData }) 
     const fullStars = Math.floor(roundedRating);
     const hasHalfStar = roundedRating % 1 !== 0;
 
-    const strapiUrl = process.env.NEXT_PUBLIC_STRAPI_API_URL || '';
-    const casinoLogoUrl = bonusData.Logo?.url ? `${strapiUrl}${bonusData.Logo.url}` : robyCasinoLogo.src;
+    const casinoLogoUrl = bonusData.Logo?.url ? bonusData.Logo.url : robyCasinoLogo.src;
     
     return (
         <main>

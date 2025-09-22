@@ -19,8 +19,6 @@ interface OnlineCasinoCardProps {
 const OnlineCasinoCard: React.FC<OnlineCasinoCardProps> = ({ casino }) => {
   const { t } = useTranslation();
   const [cardRef, isIntersecting] = useIntersectionObserver();
-  const strapiUrl = process.env.NEXT_PUBLIC_STRAPI_API_URL || '';
-
   return (
     <Link 
       href={`/online-casino/${casino.slug}`} 
@@ -38,7 +36,7 @@ const OnlineCasinoCard: React.FC<OnlineCasinoCardProps> = ({ casino }) => {
           <div className="flex-grow flex items-center justify-center w-full max-w-[75%] pt-1 sm:pt-2 md:pt-4">
             {casino.Logo?.url ? (
               <Image 
-                src={`${strapiUrl}${casino.Logo.url}`} 
+                src={casino.Logo.url} 
                 alt={`${casino.Name} Logo`} 
                 width={300}
                 height={150}

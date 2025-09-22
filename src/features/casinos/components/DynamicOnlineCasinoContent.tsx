@@ -150,8 +150,7 @@ const DynamicOnlineCasinoContent: React.FC<DynamicOnlineCasinoContentProps> = ({
     const fullStars = Math.floor(roundedRating);
     const hasHalfStar = roundedRating % 1 !== 0;
 
-    const strapiUrl = process.env.NEXT_PUBLIC_STRAPI_API_URL || '';
-    const casinoLogoUrl = casinoData.Logo?.url ? `${strapiUrl}${casinoData.Logo.url}` : robyCasinoLogo.src;
+    const casinoLogoUrl = casinoData.Logo?.url ? casinoData.Logo.url : robyCasinoLogo.src;
     
     return (
         <main>
