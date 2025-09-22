@@ -6,7 +6,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       ? req.query.slug.join("/")
       : req.query.slug;
 
-    const strapiURL = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/${slug}`;
+    const strapiURL = `https://prized-festival-c69e982a8e.strapiapp.com/${slug}`;
     const strapiRes = await fetch(strapiURL, {
       method: req.method,
       headers: {

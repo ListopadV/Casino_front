@@ -15,13 +15,35 @@ export interface StrapiMediaAttributes {
   previewUrl: string | null;
   provider: string;
   provider_metadata: Record<string, unknown> | null;
+  folderPath: string;
   createdAt: string;
   updatedAt: string;
+  publishedAt: string;
+  locale: string | null;
 }
 
 export interface StrapiMedia {
   id: number;
-  attributes: StrapiMediaAttributes;
+  documentId: string;
+  name: string;
+  alternativeText: string | null;
+  caption: string | null;
+  width: number;
+  height: number;
+  formats: Record<string, unknown>; 
+  hash: string;
+  ext: string;
+  mime: string;
+  size: number;
+  url: string; 
+  previewUrl: string | null;
+  provider: string;
+  provider_metadata: Record<string, unknown> | null;
+  folderPath: string;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string;
+  locale: string | null;
 }
 
 export interface RichTextTextChild {
@@ -51,20 +73,31 @@ export interface DetailItem {
 
 export interface Bonus {
   id: number;
+  documentId: string;
   Name: string;
   slug: string; 
-  BonusLink: string;
-  Welcome_cash_link?: string; 
-  Welcome_pack?: string; 
-  Rating_Num?: number; 
-  Is_new?: boolean; 
-  Logo?: StrapiMediaAttributes | null;
+  Description?: string | null;
+  Country?: string | null;
+  Language?: string | null;
+  BonusLink?: string;
+  Welcome_cash_link?: string | null; 
+  Welcome_pack?: string | null; 
+  Rating_Num?: number | null; 
+  Is_new?: boolean | null; 
+  Logo?: StrapiMedia | null;
   What_we_like?: RichTextBlock[]; 
   What_we_dont_like?: RichTextBlock[]; 
   General?: DetailItem[]; 
   Payment_info?: DetailItem[]; 
   Games_info?: DetailItem[]; 
-  About_casino?: RichTextBlock[]; 
+  About_casino?: RichTextBlock[];
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string | null;
+  locale: string;
+  createdBy?: Record<string, unknown>;
+  updatedBy?: Record<string, unknown>;
+  localizations?: unknown[];
 }
 
 export interface BonusesResponse {
