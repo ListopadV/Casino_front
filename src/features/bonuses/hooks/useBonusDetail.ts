@@ -3,14 +3,14 @@ import { Bonus, bonusesApi } from '@/shared/api/bonusesApi';
 import { useCallback, useEffect, useState } from 'react';
 
 interface UseBonusDetailReturn {
-  bonus: Bonus | null;
+  data: Bonus | null;
   loading: boolean;
   error: string | null;
   refetch: () => void;
 }
 
 export const useBonusDetail = (slug: string, language: string): UseBonusDetailReturn => {
-  const [bonus, setBonus] = useState<Bonus | null>(null);
+  const [data, setData] = useState<Bonus | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -27,7 +27,7 @@ export const useBonusDetail = (slug: string, language: string): UseBonusDetailRe
       console.log(`Fetching bonus detail for slug: ${bonusSlug}, language: ${lang}`);
       const fetchedBonus = await bonusesApi.getBonusBySlug(bonusSlug, lang);
       
-      setBonus(fetchedBonus);
+      setData(fetchedBonus);
       
     } catch (err) {
       console.error('Error fetching bonus detail:', err);
@@ -51,7 +51,7 @@ export const useBonusDetail = (slug: string, language: string): UseBonusDetailRe
   }, [fetchBonus, slug, language]);
 
   return {
-    bonus,
+    data,
     loading,
     error,
     refetch,

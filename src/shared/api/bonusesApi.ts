@@ -69,16 +69,16 @@ export interface Bonus {
 
 export interface BonusesResponse {
   data: Bonus[]; 
-  meta?: any; 
+  meta?: Record<string, unknown>; 
 }
 
 export const bonusesApi = {
   /**
-   *
-   * @param language 
-   * @returns 
+   * Получает список бонусов с автоматическим fallback
+   * @param language Язык контента
+   * @returns Массив бонусов
    */
-  async getBonuses(language: string): Promise<Bonus[]> {
+  async getBonuses(language: string = 'en'): Promise<Bonus[]> {
     const queryParams = new URLSearchParams({
       populate: '*', 
       locale: language,  
@@ -116,5 +116,55 @@ export const bonusesApi = {
         return response.data[0];
     }
     return null; 
+  },
+
+  /**
+   * Получает бонус по слагу с автоматическим fallback на английский язык
+   * Использует новую backend логику с умным дополнением контента
+   * @param slug Слаг бонуса
+   * @param language Предпочтительный язык
+   * @param options Дополнительные опции запроса
+   * @returns Бонус с fallback контентом или null
+   */
+  async getBonusBySlugWithFallback(
+    slug: string, 
+    language: string = 'en', 
+    options?: RequestInit
+  ): Promise<Bonus | null> {
+    const queryParams = new URLSearchParams({
+      'filters[slug][$eq]': slug,      
+      populate: '*',         
+      locale: language,      // backend автоматически применит fallback логику
+    });
+
+    const url = `/api/casino-bonuses?${queryParams.toString()}`;
+
+    const response = await apiClient.get<BonusesResponse>(url, options);
+
+    if (response.data && response.data.length > 0) {
+        return response.data[0];
+    }
+    return null; 
+  },
+
+  /**
+   * Получает список бонусов с автоматическим fallback
+   * @param language Предпочтительный язык
+   * @param options Дополнительные опции запроса
+   * @returns Массив бонусов с fallback контентом
+   */
+  async getBonusesWithFallback(
+    language: string = 'en',
+    options?: RequestInit
+  ): Promise<Bonus[]> {
+    const queryParams = new URLSearchParams({
+      populate: '*', 
+      locale: language,  // backend автоматически применит fallback логику
+    });
+    const url = `/api/casino-bonuses?${queryParams.toString()}`;
+
+    const response = await apiClient.get<BonusesResponse>(url, options);
+    
+    return response.data || []; 
   },
 };

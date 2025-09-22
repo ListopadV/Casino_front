@@ -1,6 +1,6 @@
 'use client'
 
-import { useBonuses } from "@/shared/hooks/useBonuses";
+import { useBonuses } from "@/features/main/hooks/useBonuses";
 import { useLanguageChange } from "@/shared/hooks/useLanguageChange";
 import BonusesEmptyState from "@/shared/ui/BonusesEmptyState";
 import { bebasNeue } from "@/shared/ui/theme/fonts";
@@ -38,7 +38,6 @@ export const BonusesContent: React.FC = () => {
                     {bonuses.map((bonus) => {
                       const logoUrl = bonus.Logo?.url || ''; 
                       const casinoName = bonus.Name || 'Unnamed Casino';
-                      const bonusLink = bonus.BonusLink || '#';
                       const slug = bonus.slug; 
                       
                       return (

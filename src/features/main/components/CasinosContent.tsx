@@ -1,7 +1,7 @@
 'use client' 
 
 import cloverImage from '@/assets/clover-white.png';
-import { useCasinos } from '@/shared/hooks/useCasinos';
+import { useCasinos } from '@/features/main/hooks/useCasinos';
 import { useLanguageChange } from '@/shared/hooks/useLanguageChange';
 import { useIntersectionObserver } from '@/shared/hooks/usentersectionObserver';
 import CasinosEmptyState from '@/shared/ui/CasinosEmptyState';
@@ -23,7 +23,7 @@ const OnlineCasinoCard: React.FC<OnlineCasinoCardProps> = ({ casino }) => {
 
   return (
     <Link 
-      href={`/casino-bonus/${casino.slug}`} 
+      href={`/online-casino/${casino.slug}`} 
       className="block cursor-pointer"
     >
       <div

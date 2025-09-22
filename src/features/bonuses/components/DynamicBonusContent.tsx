@@ -2,7 +2,6 @@
 
 import robyCasinoLogo from '@/assets/son-logo.png';
 import { Bonus, DetailItem, RichTextBlock, RichTextListItemChild, RichTextTextChild } from '@/shared/api/bonusesApi';
-import { OnlineCasino } from '@/features/main/types'; 
 import Image from 'next/image';
 import React, { useState } from 'react';
 
@@ -44,8 +43,8 @@ const Star: React.FC<{ percentage: number }> = ({ percentage }) => {
     );
 };
 
-interface DynamicCasinoContentProps {
-    bonusData: Bonus | OnlineCasino; 
+interface DynamicBonusContentProps {
+    bonusData: Bonus; 
 }
 
 const renderRichText = (blocks: RichTextBlock[] | undefined | null) => {
@@ -140,7 +139,9 @@ const renderRichText = (blocks: RichTextBlock[] | undefined | null) => {
     });
   };
 
-const DynamicCasinoContent: React.FC<DynamicCasinoContentProps> = ({ bonusData }) => {
+const DynamicBonusContent: React.FC<DynamicBonusContentProps> = ({ bonusData }) => {
+
+    console.log(bonusData);
     const [activeTab, setActiveTab] = useState('general');
     const rating = bonusData.Rating_Num || 0; 
     const totalStars = 10; 
@@ -308,4 +309,4 @@ const DynamicCasinoContent: React.FC<DynamicCasinoContentProps> = ({ bonusData }
     );
 };
 
-export default DynamicCasinoContent;
+export default DynamicBonusContent;

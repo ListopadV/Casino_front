@@ -1,5 +1,6 @@
-import { casinosApi, OnlineCasino } from '@/shared/api/casinosApi';
+import { casinosApi } from '@/shared/api/casinosApi';
 import { useCallback, useEffect, useState } from 'react';
+import { OnlineCasino } from '../types';
 
 interface UseCasinosReturn {
   casinos: OnlineCasino[];

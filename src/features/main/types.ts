@@ -16,4 +16,5 @@ export interface OnlineCasino {
   Payment_info?: DetailItem[];
   Games_info?: DetailItem[];
   About_casino?: RichTextBlock[];
+  similar_casinos?: OnlineCasino[];
 }
