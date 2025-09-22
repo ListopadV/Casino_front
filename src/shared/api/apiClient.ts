@@ -30,12 +30,11 @@ class ApiClient {
     return response.json();
   }
 
-  async get<T>(endpoint: string, params?: Record<string, string>): Promise<T> {
-    const url = params 
-      ? `${endpoint}?${new URLSearchParams(params).toString()}`
-      : endpoint;
-    
-    return this.request<T>(url, { method: 'GET' });
+  async get<T>(endpoint: string, options?: RequestInit): Promise<T> {
+    return this.request<T>(endpoint, { 
+        method: 'GET',
+        ...options, 
+    });
   }
 
   async post<T>(endpoint: string, data?: unknown): Promise<T> {
@@ -52,6 +51,7 @@ class ApiClient {
 
 export const clientTokenStore = createAccessTokenStore();
 export const apiClient = new ApiClient();
+
 
 /**
  * Интерфейс для данных переводов из Strapi
@@ -118,7 +118,6 @@ export const loadTranslationsFromStrapi = async (localeKey: string): Promise<Rec
     
     if (response.data && response.data.length > 0) {
       const translationData = response.data[0];
-      console.log('Translation data:', translationData.content);
       return translationData.content;
     }
     
@@ -138,7 +137,6 @@ export const loadAvailableLanguagesFromStrapi = async (): Promise<LanguageData[]
     
     if (response.data && response.data.length > 0) {
 
-      console.log('Response data:', response.data);
       const languages: LanguageData[] = response.data.map(item => ({
         code: item.localeKey,
         name: item.localeKey,
@@ -148,7 +146,6 @@ export const loadAvailableLanguagesFromStrapi = async (): Promise<LanguageData[]
         } : undefined
       }));
       
-      console.log('Processed languages:', languages);
       return languages;
     }
     return [];

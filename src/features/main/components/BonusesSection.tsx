@@ -1,8 +1,8 @@
 import bonusesBg from "@/assets/bonuses-background.jpg";
+import { useWindowSize } from "@/shared/hooks/useWindowSize";
 import ParallaxSection from "@/shared/ui/ParallaxSection";
 import React, { useCallback, useEffect, useState } from "react";
 import { BonusesContent } from "./BonusesContent";
-import { useWindowSize } from "@/shared/hooks/useWindowSize";
 
 type Props = { speed?: number; blur?: number, overlay?: string};
 
@@ -42,6 +42,7 @@ const BonusesSection = React.forwardRef<HTMLElement, Props>(function BonusesSect
 
   return (
     <ParallaxSection
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       ref={ref as any}
       src={bonusesBg}
       speed={speed}

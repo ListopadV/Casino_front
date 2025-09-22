@@ -13,6 +13,7 @@ export const CasinosSection = React.forwardRef<HTMLElement, Props>(function Casi
 ) {
   return (
     <ParallaxSection
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       ref={ref as any}
       src={casinosBg}
       speed={speed}

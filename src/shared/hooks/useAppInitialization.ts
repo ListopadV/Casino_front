@@ -32,16 +32,11 @@ export const useAppInitialization = (): UseAppInitializationReturn => {
         setLoading(true);
         setError(null);
 
-        console.log('=== App Initialization Started ===');
-        
         // Проверяем, есть ли сохраненная информация о геолокации
         const savedLocation = typeof window !== 'undefined' ? localStorage.getItem('userLocation') : null;
-        console.log('Saved location from localStorage:', savedLocation);
-        
         let locationData: GeoLocationData;
         
         if (savedLocation) {
-          console.log('Using saved location from localStorage');
           locationData = JSON.parse(savedLocation);
           setLocation(locationData);
         } else {
@@ -89,7 +84,6 @@ export const useAppInitialization = (): UseAppInitializationReturn => {
         setError(err instanceof Error ? err.message : 'Unknown error');
         
         // Fallback: загружаем английский и минимальный набор языков
-        console.log('Fallback: Loading English and basic languages...');
         try {
           await initializeI18nWithGeoLocation('en');
           setIsReady(true);

@@ -1,43 +1,107 @@
+
+import { OnlineCasino } from '@/features/main/types';
 import { apiClient } from './apiClient';
 
-export interface OnlineCasino {
-  id: number;
-  Name: string;
-  Rating_Pic?: {
-    url: string;
-  };
-  Rating_Num: number;
-  ReviewLink: string;
-  Bonus_inf?: string; 
-}
-
 export interface CasinosResponse {
-  data: Array<{
-    id: number;
-    attributes?: Record<string, unknown>;
-    [key: string]: unknown;
-  }>;
+  data: OnlineCasino[];
+  meta: {
+    pagination: {
+      page: number;
+      pageSize: number;
+      pageCount: number;
+      total: number;
+    };
+  };
 }
 
 export const casinosApi = {
-  async getCasinos(language: string): Promise<OnlineCasino[]> {
-    const response = await apiClient.get<CasinosResponse>('/api/online-casinos', {
-      populate: 'Rating_Pic',
+  /**
+   * Получает список казино с автоматическим fallback
+   * @param language Язык контента
+   * @returns Массив казино
+   */
+  async getCasinos(language: string = 'en'): Promise<OnlineCasino[]> {
+    const queryParams = new URLSearchParams({
+      populate: '*', 
       locale: language,
     });
+    const url = `/api/online-casinos?${queryParams.toString()}`;
+    const response = await apiClient.get<CasinosResponse>(url);
     
     if (!response.data) {
       return [];
     }
+    return response.data;
+  },
 
-    // Нормализация данных - убираем замыкание attributes
-    const normalizedData = response.data.map((item) => {
-      return {
-        id: item.id,
-        ...(item.attributes || item)
-      } as OnlineCasino;
+  async getCasinoBySlug(
+    slug: string, 
+    language: string, 
+    options?: RequestInit
+  ): Promise<OnlineCasino | null> {
+    const queryParams = new URLSearchParams({
+      'filters[slug][$eq]': slug,      
+      populate: '*',         
+      locale: language,      
     });
 
-    return normalizedData;
+    const url = `/api/online-casinos?${queryParams.toString()}`;
+    const response = await apiClient.get<CasinosResponse>(url, options);
+
+    if (response.data && response.data.length > 0) {
+        return response.data[0];
+    }
+    return null; 
+  },
+
+  /**
+   * Получает казино по слагу с автоматическим fallback на английский язык
+   * Использует новую backend логику с умным дополнением контента
+   * @param slug Слаг казино
+   * @param language Предпочтительный язык
+   * @param options Дополнительные опции запроса
+   * @returns Казино с fallback контентом или null
+   */
+  async getCasinoBySlugWithFallback(
+    slug: string, 
+    language: string = 'en', 
+    options?: RequestInit
+  ): Promise<OnlineCasino | null> {
+    const queryParams = new URLSearchParams({
+      'filters[slug][$eq]': slug,      
+      populate: '*',         
+      locale: language,      // backend автоматически применит fallback логику
+    });
+
+    const url = `/api/online-casinos?${queryParams.toString()}`;
+    const response = await apiClient.get<CasinosResponse>(url, options);
+
+    if (response.data && response.data.length > 0) {
+        return response.data[0];
+    }
+    return null; 
+  },
+
+  /**
+   * Получает список казино с автоматическим fallback
+   * @param language Предпочтительный язык
+   * @param options Дополнительные опции запроса
+   * @returns Массив казино с fallback контентом
+   */
+  async getCasinosWithFallback(
+    language: string = 'en',
+    options?: RequestInit
+  ): Promise<OnlineCasino[]> {
+    const queryParams = new URLSearchParams({
+      populate: '*', 
+      locale: language,  // backend автоматически применит fallback логику
+    });
+    const url = `/api/online-casinos?${queryParams.toString()}`;
+    const response = await apiClient.get<CasinosResponse>(url, options);
+    
+    if (!response.data) {
+      return [];
+    }
+    return response.data;
   },
 };

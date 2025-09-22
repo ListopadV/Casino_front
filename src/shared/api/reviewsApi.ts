@@ -48,32 +48,33 @@ export const reviewsApi = {
   /**
    * Получить отзывы для конкретного казино
    */
-  async getReviewsByCasino(casinoId: number): Promise<CasinoReview[]> {
-    const response = await apiClient.get<{data: Array<{id: number, attributes: CasinoReview}>}>(`/api/casino-reviews`, {
-      'filters[online_casino][id][$eq]': casinoId.toString(),
-      'filters[Approved][$eq]': 'true',
-      'sort': 'Created:desc'
-    });
+  // async getReviewsByCasino(casinoId: number): Promise<CasinoReview[]> {
+  //   const response = await apiClient.get<{data: Array<{id: number, attributes: CasinoReview}>}>(`/api/casino-reviews`, {
+       
+  //     'filters[online_casino][id][$eq]': casinoId.toString(),
+  //     'filters[Approved][$eq]': 'true',
+  //     'sort': 'Created:desc'
+  //   });
     
-    return response.data.map(item => ({
-      id: item.id,
-      ...item.attributes
-    }));
-  },
+  //   return response.data.map(item => ({
+  //     id: item.id,
+  //     ...item.attributes
+  //   }));
+  // },
 
   /**
    * Получить все одобренные отзывы
    */
-  async getApprovedReviews(): Promise<CasinoReview[]> {
-    const response = await apiClient.get<{data: Array<{id: number, attributes: CasinoReview}>}>(`/api/casino-reviews`, {
-      'filters[Approved][$eq]': 'true',
-      'sort': 'Created:desc',
-      'populate': 'online_casino'
-    });
+  // async getApprovedReviews(): Promise<CasinoReview[]> {
+  //   const response = await apiClient.get<{data: Array<{id: number, attributes: CasinoReview}>}>(`/api/casino-reviews`, {
+  //     'filters[Approved][$eq]': 'true',
+  //     'sort': 'Created:desc',
+  //     'populate': 'online_casino'
+  //   });
     
-    return response.data.map(item => ({
-      id: item.id,
-      ...item.attributes
-    }));
-  }
+  //   return response.data.map(item => ({
+  //     id: item.id,
+  //     ...item.attributes
+  //   }));
+  // }
 };

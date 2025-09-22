@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 
 
 interface Casino {
@@ -38,12 +39,14 @@ const CasinoCard: React.FC<Casino> = ({ name, logoUrl, logoBgColor, reviewUrl, w
         <li className="relative card card-compact bg-gray-200 border border-gray-300 transition-all select-none shadow rounded-md">
             <a href={reviewUrl} className="">
                 <figure style={{ backgroundColor: logoBgColor }} className="aspect-video rounded-xl border-2 border-base-200">
-                    <img
+                    <Image
                         alt={`${name} logo`}
                         loading="lazy"
                         className="max-w-[95%] max-h-[95%] transition-transform"
                         draggable="false"
                         src={logoUrl}
+                        width={300}
+                        height={300}
                     />
                 </figure>
             </a>
