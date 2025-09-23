@@ -53,7 +53,7 @@ const renderRichText = (blocks: RichTextBlock[] | undefined | null) => {
       switch (block.type) {
         case 'paragraph':
           return (
-            <p key={index}>
+            <p key={index} className="mb-4">
               {block.children.map((child: RichTextTextChild | RichTextListItemChild, i: number) => { 
                 if (child.type === 'text') { 
                     return (
@@ -71,7 +71,7 @@ const renderRichText = (blocks: RichTextBlock[] | undefined | null) => {
           );
         case 'list':
             return (
-                <ul key={index} className="list-disc list-inside space-y-1">
+                <ul key={index} className="list-disc list-inside space-y-1 mb-4">
                     {block.children.map((listItem: RichTextTextChild | RichTextListItemChild, liIndex: number) => {
                         if (listItem.type === 'list-item') { 
                             return (
@@ -104,7 +104,7 @@ const renderRichText = (blocks: RichTextBlock[] | undefined | null) => {
             );
         case 'heading':
             const HeadingTag = `h${block.level || 1}` as keyof React.JSX.IntrinsicElements;
-            return <HeadingTag key={index}>{block.children.map((child: RichTextTextChild | RichTextListItemChild, i: number) => {
+            return <HeadingTag key={index} className="font-bold text-black mt-6 mb-3">{block.children.map((child: RichTextTextChild | RichTextListItemChild, i: number) => {
                 if (child.type === 'text') {
                     return (
                         <span key={i} style={{ 
@@ -119,7 +119,7 @@ const renderRichText = (blocks: RichTextBlock[] | undefined | null) => {
             })}</HeadingTag>;
         default:
           return (
-            <p key={index}>
+            <p key={index} className="mb-4">
                 {block.children?.map((child: RichTextTextChild | RichTextListItemChild, i: number) => {
                     if (child.type === 'text') {
                         return (
@@ -295,7 +295,7 @@ const DynamicBonusContent: React.FC<DynamicBonusContentProps> = ({ bonusData }) 
                 <div className="container max-w-screen-xl mx-auto py-8 lg-py-12 px-4 flex flex-col gap-8">
                     
                         <div className="prose max-w-none text-gray-800">
-                            <h2 className='text-black'><b>About {bonusData.Name}</b></h2>
+                            <h2 className='text-black mb-8'><b>About {bonusData.Name}</b></h2>
                             {renderRichText(bonusData.About_casino)} 
                         </div>
                     
