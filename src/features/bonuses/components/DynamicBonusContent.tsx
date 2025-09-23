@@ -53,7 +53,7 @@ const renderRichText = (blocks: RichTextBlock[] | undefined | null) => {
       switch (block.type) {
         case 'paragraph':
           return (
-            <p key={index} className="mb-4">
+            <p key={index} className="mb-10">
               {block.children.map((child: RichTextTextChild | RichTextListItemChild, i: number) => { 
                 if (child.type === 'text') { 
                     return (
@@ -71,7 +71,7 @@ const renderRichText = (blocks: RichTextBlock[] | undefined | null) => {
           );
         case 'list':
             return (
-                <ul key={index} className="list-disc list-inside space-y-1 mb-4">
+                <ul key={index} className="list-disc list-inside space-y-1 my-4">
                     {block.children.map((listItem: RichTextTextChild | RichTextListItemChild, liIndex: number) => {
                         if (listItem.type === 'list-item') { 
                             return (
@@ -119,7 +119,7 @@ const renderRichText = (blocks: RichTextBlock[] | undefined | null) => {
             })}</HeadingTag>;
         default:
           return (
-            <p key={index} className="mb-4">
+            <p key={index} className="my-4">
                 {block.children?.map((child: RichTextTextChild | RichTextListItemChild, i: number) => {
                     if (child.type === 'text') {
                         return (
@@ -292,7 +292,7 @@ const DynamicBonusContent: React.FC<DynamicBonusContentProps> = ({ bonusData }) 
 
             {/* ОСТАЛЬНАЯ ЧАСТЬ СТРАНИЦЫ НА СВЕТЛОМ ФОНЕ */}
             <div className="bg-gray-100">
-                <div className="container max-w-screen-xl mx-auto py-8 lg-py-12 px-4 flex flex-col gap-8">
+                <div className="container max-w-screen-xl mx-auto py-10 lg-py-12 px-4 flex flex-col gap-8">
                     
                         <div className="prose max-w-none text-gray-800">
                             <h2 className='text-black mb-8'><b>About {bonusData.Name}</b></h2>
